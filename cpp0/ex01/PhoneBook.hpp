@@ -3,6 +3,8 @@
 
 #include "Contact.hpp"
 
+std::string GetInputForField ( int option );
+
 class PhoneBook {
 
     private: 
@@ -16,7 +18,7 @@ class PhoneBook {
         void SearchContactInterface ();
         void SearchContactByIndex ( std::string prompt );
         int GetPhoneBookSize ();
-
+    
 };
 
 #endif
