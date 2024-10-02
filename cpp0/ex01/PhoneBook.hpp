@@ -3,7 +3,12 @@
 
 #include "Contact.hpp"
 
+#include <iostream>
+#include <string>
+#include <cstdlib>
+
 std::string GetInputForField ( int option );
+std::string RightAlignAndTruncate (std::string to_format);
 
 class PhoneBook {
 
