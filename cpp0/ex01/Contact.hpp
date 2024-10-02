@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 class Contact {
 
@@ -24,7 +25,7 @@ class Contact {
 
         std::string GetFirstName ();
         std::string GetLastName ();
-        std::string GetNicktName ();
+        std::string GetNickName ();
         std::string GetPhoneNumber ();
         std::string GetDarkestSecret ();
 

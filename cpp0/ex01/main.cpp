@@ -13,9 +13,9 @@ int main (void)
         std::getline ( std::cin, prompt );
 
         if ( !prompt.compare("ADD") )
-            std::cout << "PROMPT: ADD" << std::endl;
+            phonebook.AddContact();
         else if ( !prompt.compare("SEARCH") )
-            std::cout << "PROMPT: SEARCH" << std::endl;
+            phonebook.ShowPhoneBook();
         else if ( !prompt.compare("EXIT") || prompt.empty() )
             break;
     }
