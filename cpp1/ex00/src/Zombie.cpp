@@ -7,7 +7,8 @@ Zombie::Zombie ( std::string name ) {
 
 Zombie::~Zombie ( void ) {
 
-    std::cout << "Destructor called " << std::endl;
+    std::cout << this->_name;
+    std::cout << " called destructor" << std::endl;
 
 }
 
