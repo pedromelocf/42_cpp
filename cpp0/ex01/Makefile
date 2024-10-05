@@ -10,7 +10,7 @@ CPP_SRCS = $(wildcard ./src/*.cpp)
 
 C++98 = c++ -std=c++98
 FLAGS = -Wall -Werror -Wextra -Wunreachable-code -Ofast
-VALGRIND = valgrind -q
+VALGRIND = valgrind 
 
 all: $(NAME)
 

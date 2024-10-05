@@ -1,4 +1,4 @@
-NAME = account
+NAME = zombiehorde
 
 CPP_SRC_PATH = ./src/
 CPP_OBJ_PATH = ./src/cpp_object
@@ -10,7 +10,7 @@ CPP_SRCS = $(wildcard ./src/*.cpp)
 
 C++98 = c++ -std=c++98
 FLAGS = -Wall -Werror -Wextra -Wunreachable-code -Ofast
-VALGRIND = valgrind
+VALGRIND = valgrind 
 
 all: $(NAME)
 
