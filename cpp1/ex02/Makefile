@@ -1,4 +1,4 @@
-NAME = zombiebrain
+NAME = hithisbrain
 
 CPP_SRC_PATH = ./src/
 CPP_OBJ_PATH = ./src/cpp_object
