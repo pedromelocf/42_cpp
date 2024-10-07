@@ -1,18 +1,10 @@
 #include "HumanA.hpp"
 #include "Weapon.hpp"
 
+HumanA::HumanA( std::string name, Weapon& weapon ) : name( name ), type( weapon ) {}
 
-HumanA::HumanA( std::string name, Weapon type ) {
-    
-    this->name = name;
-    this->type = type;
-
-}
-
-HumanA::~HumanA( void ) {
-    std::cout << "Destructor HumanB called" << std::endl;
-}
+HumanA::~HumanA( void ) {}
 
 void    HumanA::attack( void ) {
-    std::cout << this->name << "attacks with weapon" << this->type->type << std::endl; 
+    std::cout << this->name << " attacks with weapon " << this->type.getType() << std::endl; 
 }
