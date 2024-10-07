@@ -2,15 +2,16 @@
 
 Zombie* zombieHorde( int N, std::string name ) {
 
-    Zombie** zombie_array = new Zombie*[N];
+    Zombie* horde = new Zombie[N]; 
 
-    for (int i = 0; i < N; i++) {
+    (void)name;
 
-        Zombie zombie_object( name );
-        *zombie_array[i] = zombie_object;
+    for (int i = 0; i < N; ++i) {
+
+        horde[i].setName( name );
 
     }
 
-    return ( *zombie_array );
+    return ( horde );
 
 }

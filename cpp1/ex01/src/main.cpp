@@ -2,37 +2,48 @@
 
 int main (void) {
 
-    std::cout << "Test 1 :" << std::endl;
+    // ----------------TEST1 ------------------
+
+    std::cout << std::endl << "Test 1 :" << std::endl << std::endl;
 
     Zombie* VectorHorde = zombieHorde( 3, "Vector" );
 
-    for ( int i = 0; i < 3; i++) {
+    for ( int i = 0; i < 3; ++i) {
+
         VectorHorde[i].announce();
     }
 
-    delete ( VectorHorde );
+    delete[] VectorHorde ;
 
 
-    std::cout << "Test 2 :" << std::endl;
+    // ----------------TEST2 ------------------
+    
+    std::cout << std::endl << "Test 2 :" << std::endl << std::endl;
 
-    Zombie* Pores = zombieHorde( -1, "Pores" );
+    Zombie* Pores = zombieHorde( 10, "Pores" );
 
-    for ( int i = 0; i < 3; i++) {
+    for ( int i = 0; i < 10; i++) {
+
         Pores[i].announce();
+
     }
 
-    delete ( Pores );
+    delete[] Pores ;
 
 
-    std::cout << "Test 3 :" << std::endl;
+    // ----------------TEST3 ------------------
+    
+    std::cout << std::endl << "Test 3 :" << std::endl << std::endl;
 
     Zombie* Big = zombieHorde( 15, "Big" );
 
-    for ( int i = 0; i < 3; i++) {
+    for ( int i = 0; i < 15; i++) {
+
         Big[i].announce();
+
     }
 
-    delete ( Big );
+    delete[] Big ;
 
     return ( 0 );
 }
