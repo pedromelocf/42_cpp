@@ -10,7 +10,8 @@ void    Harl::complain( std::string level ) {
     !level.compare("INFO") ? Harl::info() :  void() ;
     !level.compare("WARNING") ? Harl::warning() :  void() ;
     !level.compare("ERROR") ? Harl::error() :  void() ;
-    
+    !level.compare("INVALID") ? Harl::invalid() :  void() ;
+
 } 
 
 void    Harl::debug( void ) {
