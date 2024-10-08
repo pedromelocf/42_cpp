@@ -2,13 +2,15 @@
 
 int main ( void ) {
 
-    Harl harl();
+    Harl harl;
 
-    // harl.complain("DEBUG");
+    harl.ptrToMemberFunc = &Harl::complain;
 
-    void (Harl::*ptrToMemberFunc)(std::string) = &Harl::complain;
-
-    void (harl.*ptrToMemberFunc)("DEBUG");
-
+    (harl.*(harl.ptrToMemberFunc))("DEBUG");
+    (harl.*(harl.ptrToMemberFunc))("INFO");
+    (harl.*(harl.ptrToMemberFunc))("WARNING");
+    (harl.*(harl.ptrToMemberFunc))("ERROR");
+    (harl.*(harl.ptrToMemberFunc))("OTHER");
+    
     return 0;
 }

@@ -6,11 +6,11 @@ Harl::~Harl ( void ) {}
 
 void    Harl::complain( std::string level ) {
 
-    !level.compare("DEBUG") { std::cout << "DEBUG" << std::endl; }
-    !level.compare("INFO") { std::cout << "INFO" << std::endl; }
-    !level.compare("WARNING") { std::cout << " WARNING" << std::endl; }
-    !level.compare("ERROR") { std::cout << " ERROR " << std::endl; }
-
+    !level.compare("DEBUG") ? Harl::debug() :  void() ;
+    !level.compare("INFO") ? Harl::info() :  void() ;
+    !level.compare("WARNING") ? Harl::warning() :  void() ;
+    !level.compare("ERROR") ? Harl::error() :  void() ;
+    
 } 
 
 void    Harl::debug( void ) {
@@ -34,5 +34,11 @@ void    Harl::warning ( void ) {
 void    Harl::error ( void ) {
 
     std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
+
+}
+
+void    Harl::invalid ( void ) {
+
+    std::cout << "You can´t complan about that, Harl." << std::endl;
 
 }
