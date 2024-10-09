@@ -14,8 +14,33 @@ bool    Replace::validate ( void ) {
 
 void    Replace::copyContent ( void ) {
 
-    std::string newfile = this->createFile();
-    
+    std::string newFile( this->_argv[1] );
+    newFile.append( ".replace" );
+    std::ofstream outfile ( newFile.c_str(), std::ios::trunc );
+
+    std::string line;
+    std::ifstream inputFile( this->_argv[1] );
+
+    std::string s1( this->_argv[2] );
+    std::string s2( this->_argv[3] );
+
+    while ( std::getline(inputFile, line )) {
+        
+        std::string newLine;
+
+        for ( long unsigned int i = 0; i <= line.length(); i += s1.length() ) {
+
+            if ( !line.compare( i, i + s1.length(), s1 ) )
+                newLine += s2;
+            else
+                newLine += line.substr( i, s1.length() );
+            
+        }
+        outfile << newLine << std::endl;
+    }
+
+    inputFile.close();
+    outfile.close();
 
 }
 
@@ -40,14 +65,5 @@ bool    Replace::fileExists( void ) {
 
     fio.close();
     return true;
-
-}
-
-std::string Replace::createFile( void ) {
-
-    std::string newfile( this->_argv[1] );
-    newfile.append( ".replace" );
-    std::ofstream outfile ( newfile.c_str() );
-    return newfile;
 
 }

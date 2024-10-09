@@ -18,7 +18,6 @@ class Replace {
         char** _argv;
         bool invalidArgs ();
         bool fileExists() ;
-        std::string createFile();
 
 };
 
