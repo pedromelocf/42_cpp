@@ -25,17 +25,23 @@ void    Replace::copyContent ( void ) {
     std::string s2( this->_argv[3] );
 
     while ( std::getline(inputFile, line )) {
-        
+
         std::string newLine;
 
-        for ( long unsigned int i = 0; i <= line.length(); i += s1.length() ) {
+        for ( long unsigned int i = 0; i < line.length(); i += 1 ) {
 
-            if ( !line.compare( i, i + s1.length(), s1 ) )
+            if (( line.length() >= s1.length() + i ) && ( !line.compare( i, s1.length(), s1 ))) {
+
                 newLine += s2;
-            else
-                newLine += line.substr( i, s1.length() );
+                i += s1.length() - 1;
+
+            }
             
+            else 
+                newLine += line[i];  
+
         }
+
         outfile << newLine << std::endl;
     }
 
