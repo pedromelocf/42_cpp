@@ -3,18 +3,17 @@
 
 #include <iostream>
 
-
-class FixedPointNumber {
+class Fixed {
 
     private:
         int value;
         static const int fracBits = 8;
 
     public:
-        FixedPointNumber( void );
-        FixedPointNumber  ( const FixedPointNumber &f);
-        ~FixedPointNumber( void );
-        FixedPointNumber & operator= ( const FixedPointNumber &f);
+        Fixed( void );
+        Fixed  ( const Fixed& f);
+        ~Fixed( void );
+        Fixed& operator = ( const Fixed& f);
         int getRawBits( void ) const;
         void setRawBits( int const raw );
 
