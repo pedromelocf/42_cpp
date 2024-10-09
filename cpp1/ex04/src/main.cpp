@@ -5,7 +5,7 @@ int main ( int argc, char **argv ) {
     Replace replace( argc, argv );
 
     if ( !replace.validate( ) )
-        return (1);
+        return 1;
     
     replace.copyContent();
 

@@ -3,7 +3,7 @@
 
 #include "iostream"
 
-
+bool    invalidArgs ( int argc );
 
 class Harl {
 
@@ -18,7 +18,8 @@ class Harl {
         void    warning ( void );
         void    error ( void );
         void    insignificant ( void );
-        enum    Level{DEBUG, INFO, WARNING, ERROR}; 
+        enum    Level{DEBUG, INFO, WARNING, ERROR, INSIGNIFICANT};
+        int     strToInt( std::string level );
 
 };
 

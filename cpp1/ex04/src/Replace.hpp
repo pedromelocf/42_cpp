@@ -9,15 +9,15 @@ class Replace {
 
     public:
         Replace( int argc, char **argv );
-        ~Replace();
-        bool validate();
-        void copyContent();
+        ~Replace( void );
+        bool validate( void );
+        void copyContent( void );
 
     private:
         int _argc;
         char** _argv;
-        bool invalidArgs ();
-        bool fileExists() ;
+        bool invalidArgs ( void );
+        bool fileExists( void ) ;
 
 };
 
