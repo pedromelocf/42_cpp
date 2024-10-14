@@ -1,17 +1,16 @@
 #include "PhoneBook.hpp"
 
+int PhoneBook::index = 0;
+
 void PhoneBook::AddContact () {
 
-    int size = GetPhoneBookSize();
+    this->contact[index % 8].SetFirstName(GetInputForField(1));
+    this->contact[index % 8].SetLastName(GetInputForField(2));
+    this->contact[index % 8].SetNickName(GetInputForField(3));
+    this->contact[index % 8].SetPhoneNumber(GetInputForField(4));
+    this->contact[index % 8].SetDarkestSecret(GetInputForField(5));
 
-    if ( size == 8 )
-        size -= 1;
-
-    this->contact[size].SetFirstName(GetInputForField(1));
-    this->contact[size].SetLastName(GetInputForField(2));
-    this->contact[size].SetNickName(GetInputForField(3));
-    this->contact[size].SetPhoneNumber(GetInputForField(4));
-    this->contact[size].SetDarkestSecret(GetInputForField(5));
+    index += 1;
 
 }
 
