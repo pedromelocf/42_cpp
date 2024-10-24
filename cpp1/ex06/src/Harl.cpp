@@ -4,8 +4,6 @@ Harl::Harl () {}
 
 Harl::~Harl () {}
 
-const	std::string Harl::levels[4] = { "DEBUG", "INFO", "WARNING", "ERROR" };
-
 void    Harl::filter( std::string level ) {
 
     switch ( strToInt( level ) ) {
@@ -28,7 +26,7 @@ void    Harl::filter( std::string level ) {
 			break;
     }
 
-} 
+}
 
 void    Harl::debug() {
 
@@ -42,7 +40,7 @@ void    Harl::info () {
 
     std::cout << "[ INFO ]" << std::endl;
     std::cout << "I cannot believe adding extra bacon costs more money." << std::endl;
-    std::cout << "You didn’t put enough bacon in my burger!" << std::endl; 
+    std::cout << "You didn’t put enough bacon in my burger!" << std::endl;
     std::cout << "If you did, I wouldn’t be asking for more!" << std::endl << std::endl;
 
 }
@@ -68,6 +66,8 @@ void    Harl::insignificant () {
 }
 
 int     Harl::strToInt( std::string level ) {
+
+    std::string levels[4] = { "DEBUG", "INFO", "WARNING", "ERROR" };
 
 	for ( int i = 0; i < 4; i++ ) {
 		if ( level == levels[i] )

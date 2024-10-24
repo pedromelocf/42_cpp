@@ -8,7 +8,7 @@ bool    invalidArgs ( int argc );
 
 class Harl {
 
-    public :    
+    public :
         Harl ();
         ~Harl ();
         void    filter ( std::string level );
@@ -19,10 +19,9 @@ class Harl {
         void    warning ();
         void    error ();
         void    insignificant ();
-		static const std::string levels[4];
         int     strToInt( std::string level );
 
 };
 
 
-#endif 
+#endif
