@@ -1,44 +1,57 @@
 #include "Harl.hpp"
 
-Harl::Harl ( void ) {}
+Harl::Harl () {}
 
-Harl::~Harl ( void ) {}
+Harl::~Harl () {}
 
-void    Harl::complain( std::string level ) {
+void    Harl::complain( const std::string& level ) {
 
-    !level.compare("DEBUG") ? Harl::debug() :  void() ;
-    !level.compare("INFO") ? Harl::info() :  void() ;
-    !level.compare("WARNING") ? Harl::warning() :  void() ;
-    !level.compare("ERROR") ? Harl::error() :  void() ;
-    !level.compare("INVALID") ? Harl::invalid() :  void() ;
+	levels s_levels[4] = {
 
-} 
+			{"DEBUG", &Harl::debug},
+			{"INFO" , &Harl::info},
+			{"WARNING", &Harl::warning},
+			{"ERROR", &Harl::error},
 
-void    Harl::debug( void ) {
+	};
+
+	for (int i = 0; i < 4; i++) {
+		if ( level == s_levels[i].s_level ) {
+			ptrToMemberFunc = s_levels[i].ptrToMemberFunc;
+			(this->*ptrToMemberFunc)();
+			return ;
+		}
+	}
+
+	this->invalid();
+
+}
+
+void    Harl::debug() {
 
     std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger. I really do!" << std::endl;
 
 }
 
-void    Harl::info ( void ) {
+void    Harl::info () {
 
     std::cout << "I cannot believe adding extra bacon costs more money. You didn’t put enough bacon in my burger! If you did, I wouldn’t be asking for more!" << std::endl;
 
 }
 
-void    Harl::warning ( void ) {
+void    Harl::warning () {
 
     std::cout << "I think I deserve to have some extra bacon for free. I’ve been coming for years whereas you started working here since last month." << std::endl;
 
 }
 
-void    Harl::error ( void ) {
+void    Harl::error () {
 
     std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 
 }
 
-void    Harl::invalid ( void ) {
+void    Harl::invalid () {
 
     std::cout << "You can´t complan about that, Harl." << std::endl;
 

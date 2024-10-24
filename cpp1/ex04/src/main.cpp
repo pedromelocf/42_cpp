@@ -2,13 +2,13 @@
 
 int main ( int argc, char **argv ) {
 
-    Replace replace( argc, argv );
+	Replace replace( argc, argv );
 
-    if ( !replace.validate( ) )
-        return 1;
-    
-    replace.copyContent();
+	if ( !replace.validate() )
+		return 1;
 
-    return 0;
+	replace.copyContent();
+
+	return 0;
 
 }

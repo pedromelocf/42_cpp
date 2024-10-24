@@ -1,18 +1,18 @@
 #include "Replace.hpp"
 
-Replace::Replace( int argc, char** argv ) : _argc( argc ), _argv(argv) {}
+Replace::Replace( int argc, char** argv ) : _argc( argc ), _argv( argv ) {}
 
-Replace::~Replace( void ) {}
+Replace::~Replace() {}
 
-bool    Replace::validate ( void ) {
+bool    Replace::validate () {
 
-    if ( !this->invalidArgs() || !this->fileExists() )
-        return false;
-    return true;
+    if ( this->invalidArgs() && this->fileExists() )
+        return true;
+    return false;
 
 }
 
-void    Replace::copyContent ( void ) {
+void    Replace::copyContent () {
 
     std::string newFile( this->_argv[1] );
     newFile.append( ".replace" );
@@ -24,22 +24,19 @@ void    Replace::copyContent ( void ) {
     std::string s1( this->_argv[2] );
     std::string s2( this->_argv[3] );
 
-    while ( std::getline(inputFile, line )) {
+    while ( std::getline( inputFile, line )) {
 
         std::string newLine;
 
         for ( long unsigned int i = 0; i < line.length(); i += 1 ) {
 
             if (( line.length() >= s1.length() + i ) && ( !line.compare( i, s1.length(), s1 ))) {
-
                 newLine += s2;
                 i += s1.length() - 1;
-
             }
-            
-            else 
-                newLine += line[i];  
 
+            else
+                newLine += line[i];
         }
 
         outfile << newLine << std::endl;
@@ -50,7 +47,7 @@ void    Replace::copyContent ( void ) {
 
 }
 
-bool    Replace::invalidArgs ( void ) {
+bool    Replace::invalidArgs () {
 
     if ( this->_argc != 4) {
         std::cout << "Invalid arguments: expected -> \"FILENAME\" \"S1\" \"S2\"" << std::endl;
@@ -60,7 +57,7 @@ bool    Replace::invalidArgs ( void ) {
     return true;
 }
 
-bool    Replace::fileExists( void ) {
+bool    Replace::fileExists() {
 
     std::ofstream fio( this->_argv[1], std::ios::in );
 

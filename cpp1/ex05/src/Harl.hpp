@@ -5,19 +5,25 @@
 
 class Harl {
 
-    public :    
-        Harl ( void );
-        ~Harl ( void );
-        void    complain ( std::string level );
-        void    ( Harl::*ptrToMemberFunc)( std::string );
+    public :
+        Harl ();
+        ~Harl ();
+        void	complain ( const std::string& level );
+		void	(Harl::*ptrToMemberFunc)();
 
     private:
-        void    debug( void );
-        void    info ( void );
-        void    warning ( void );
-        void    error ( void );
-        void    invalid ( void );
+        void    debug();
+        void    info ();
+        void    warning ();
+        void    error ();
+        void    invalid ();
 
+};
+
+struct levels {
+
+	std::string	s_level;
+	void		( Harl::*ptrToMemberFunc )();
 
 };
 
