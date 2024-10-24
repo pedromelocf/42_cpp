@@ -14,32 +14,37 @@ bool    Replace::validate () {
 
 void    Replace::copyContent () {
 
-    std::string newFile( this->_argv[1] );
+	std::string newFile( this->_argv[1] );
     newFile.append( ".replace" );
+
     std::ofstream outfile ( newFile.c_str(), std::ios::trunc );
+	if (!outfile.is_open()) {
+		std::cerr << "Failed to open file " << newFile << std::endl;
+		return ;
+	}
 
-    std::string line;
     std::ifstream inputFile( this->_argv[1] );
+	if (!inputFile.is_open()) {
+		std::cerr << "Failed to open file " << this->_argv[1] << std::endl;
+		return ;
+	}
 
-    std::string s1( this->_argv[2] );
+	std::string s1( this->_argv[2] );
     std::string s2( this->_argv[3] );
+	std::string line;
 
     while ( std::getline( inputFile, line )) {
 
-        std::string newLine;
+		size_t	pos = 0;
+		size_t	occ = 0;
 
-        for ( long unsigned int i = 0; i < line.length(); i += 1 ) {
+		while ((pos = line.find(s1, occ)) != std::string::npos) {
 
-            if (( line.length() >= s1.length() + i ) && ( !line.compare( i, s1.length(), s1 ))) {
-                newLine += s2;
-                i += s1.length() - 1;
-            }
+			outfile << line.substr(occ, pos - occ) << s2;
+			occ = pos + s1.length();
 
-            else
-                newLine += line[i];
-        }
-
-        outfile << newLine << std::endl;
+		}
+		outfile << line.substr(occ) << std::endl;
     }
 
     inputFile.close();
@@ -49,10 +54,16 @@ void    Replace::copyContent () {
 
 bool    Replace::invalidArgs () {
 
-    if ( this->_argc != 4) {
+    if ( this->_argc != 4 ) {
         std::cout << "Invalid arguments: expected -> \"FILENAME\" \"S1\" \"S2\"" << std::endl;
         return false;
     }
+
+	std::string s1( this->_argv[2] );
+	if (s1.empty()){
+		std::cout << "Invalid s1 : expected -> not empty" << std::endl;
+		return false;
+	}
 
     return true;
 }
