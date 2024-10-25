@@ -35,8 +35,7 @@ void    Replace::copyContent () {
 
     while ( std::getline( inputFile, line )) {
 
-		size_t	pos = 0;
-		size_t	occ = 0;
+		size_t	pos = 0, occ = 0;
 
 		while ((pos = line.find(s1, occ)) != std::string::npos) {
 
