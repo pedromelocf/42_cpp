@@ -19,6 +19,14 @@ Fixed& Fixed::operator= ( const Fixed& f) {
 	return *this;
 }
 
+Fixed::Fixed( const int i) {
+	std::cout << "Int constructor called" << std::endl;
+}
+
+Fixed::Fixed ( const float f) {
+	std::cout << "Float constructor called" << std::endl;
+}
+
 int     Fixed::getRawBits( void ) const {
     std::cout << "getRawBits member function called" << std::endl;
     return _value;
@@ -26,4 +34,12 @@ int     Fixed::getRawBits( void ) const {
 
 void    Fixed:: setRawBits( int const raw ) {
     _value = raw;
+}
+
+float	Fixed::toFloat ( void ) const {
+
+}
+
+int	Fixed::toInt ( void ) const {
+
 }

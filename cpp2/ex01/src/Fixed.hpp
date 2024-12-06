@@ -13,10 +13,14 @@ class Fixed {
         Fixed( void );
         Fixed  ( const Fixed& f);
         ~Fixed( void );
-        Fixed& operator = ( const Fixed& f);
+        Fixed& operator= ( const Fixed& f);
+		Fixed( const int i);
+		Fixed ( const float f);
+
         int getRawBits( void ) const;
         void setRawBits( int const raw );
-
+		float toFloat( void ) const;
+		int	toInt ( void ) const;
 };
 
 #endif

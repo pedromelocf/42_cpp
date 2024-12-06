@@ -1,4 +1,4 @@
-NAME = hithisbrain
+NAME = fixedpointer1
 
 CPP_SRC_PATH = ./src/
 CPP_OBJ_PATH = ./src/cpp_object
