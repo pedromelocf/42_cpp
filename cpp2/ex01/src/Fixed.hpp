@@ -6,24 +6,25 @@
 
 class Fixed {
 
-    private:
-        int _value;
-        static const int _fracBits = 8;
+	private:
+		int _value;
+		static const int _fracBits = 8;
 
-    public:
-        Fixed( void );
-        Fixed  ( const Fixed& f);
-        ~Fixed( void );
-        Fixed& operator= ( const Fixed& f);
+	public:
+		Fixed( void );
+		Fixed  ( const Fixed& f);
+		~Fixed( void );
+		Fixed& operator= ( const Fixed& f);
 		Fixed( const int i);
 		Fixed ( const float f);
 
-        int getRawBits( void ) const;
-        void setRawBits( int const raw );
+		int getRawBits( void ) const;
+		void setRawBits( int const raw );
 		float toFloat( void ) const;
 		int	toInt ( void ) const;
+		
 };
 
-std::ostream 
+std::ostream& operator<< ( std::ostream& os, const Fixed& f);
 
 #endif
