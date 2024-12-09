@@ -29,7 +29,7 @@ void	Fixed:: setRawBits( int const raw ) {
 	_value = raw;
 }
 
-// MEMBER FUNCTIONS
+// TO INT/TO FLOAT
 
 float	Fixed::toFloat ( void ) const {
 	return ((float)this->_value / (1 << this->_fracBits));
@@ -85,57 +85,71 @@ bool Fixed::operator!= ( const Fixed& f1) const {
 
 // OVERLOAD ARITHMETIC OPERATIONS
 
-Fixed Fixed::operator+ (const Fixed& f1) {
+Fixed Fixed::operator+ (const Fixed& f1) const {
 	return Fixed(this->toFloat() + f1.toFloat());
 };
 
-Fixed Fixed::operator- (const Fixed& f1) {
+Fixed Fixed::operator- (const Fixed& f1) const {
 	return Fixed(this->toFloat() - f1.toFloat());
 };
 
-Fixed Fixed::operator* (const Fixed& f1) {
+Fixed Fixed::operator* (const Fixed& f1) const {
 	return Fixed(this->toFloat() * f1.toFloat());
 };
 
-Fixed Fixed::operator/ (const Fixed& f1) {
+Fixed Fixed::operator/ (const Fixed& f1) const {
 	return Fixed(this->toFloat() / f1.toFloat());
 };
 
 // OVERLOAD INCREMENT/DECREMENT OPERATIONS
 
-Fixed Fixed::operator++ (const Fixed& f1) {
-	return Fixed(this->toFloat() + f1.toFloat());
+Fixed& Fixed::operator++ ( void ) {
+	this->_value++;
+	return *this;
 };
 
-Fixed Fixed::operator-- (const Fixed& f1) {
-	return Fixed(this->toFloat() - f1.toFloat());
+Fixed Fixed::operator++ ( int ) {
+	Fixed tmp (*this);
+	this->_value++;
+	return tmp;
+};
+
+Fixed& Fixed::operator-- ( void ) {
+	this->_value--;
+	return *this;
+};
+
+Fixed Fixed::operator-- ( int ) {
+	Fixed tmp (*this);
+	this->_value--;
+	return tmp;
 };
 
 
 // OVERLOAD MAX/MIN
 
-static Fixed Fixed::min (Fixed& f1, Fixed& f2) {
+Fixed& Fixed::min (Fixed& f1, Fixed& f2) {
 	if (f1.toFloat() < f2.toFloat())
 		return f1;
 	else
 		return f2;
 }
 
-static Fixed Fixed::min (const Fixed& f1, const Fixed& f2) {
+const Fixed& Fixed::min (const Fixed& f1, const Fixed& f2) {
 	if (f1.toFloat() < f2.toFloat())
 		return f1;
 	else
 		return f2;
 }
 
-static Fixed Fixed::max (Fixed& f1, Fixed& f2) {
+Fixed& Fixed::max (Fixed& f1, Fixed& f2) {
 	if (f1.toFloat() > f2.toFloat())
 		return f1;
 	else
 		return f2;
 }
 
-static Fixed Fixed::max (const Fixed& f1, const Fixed& f2) {
+const Fixed& Fixed::max (const Fixed& f1, const Fixed& f2) {
 	if (f1.toFloat() > f2.toFloat())
 		return f1;
 	else

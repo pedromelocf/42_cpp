@@ -13,8 +13,8 @@ class Fixed {
 	public:
 		Fixed( void );
 		Fixed  ( const Fixed& f);
-		~Fixed( void );
 		Fixed& operator= ( const Fixed& f);
+		~Fixed( void );
 		Fixed( const int i);
 		Fixed ( const float f);
 
@@ -30,15 +30,20 @@ class Fixed {
 		bool operator== ( const Fixed& f1) const;
 		bool operator!= ( const Fixed& f1) const;
 
-		Fixed operator+ (const Fixed& f1);
-		Fixed operator- (const Fixed& f1);
-		Fixed operator* (const Fixed& f1);
-		Fixed operator/ (const Fixed& f1);
+		Fixed operator+ (const Fixed& f1) const;
+		Fixed operator- (const Fixed& f1) const;
+		Fixed operator* (const Fixed& f1) const;
+		Fixed operator/ (const Fixed& f1) const;
 
-		static Fixed Fixed::min (Fixed& f1, Fixed& f2);
-		static Fixed Fixed::min (const Fixed& f1, const Fixed& f2);
-		static Fixed Fixed::max (Fixed& f1, Fixed& f2);
-		static Fixed Fixed::max (const Fixed& f1, const Fixed& f2);
+	 	Fixed& operator++ ( void );
+		Fixed operator++ ( int);
+		Fixed& operator-- ( void );
+		Fixed operator-- ( int );
+
+		static Fixed& min (Fixed& f1, Fixed& f2);
+		const static Fixed& min (const Fixed& f1, const Fixed& f2);
+		static Fixed& max (Fixed& f1, Fixed& f2);
+		const static Fixed& max (const Fixed& f1, const Fixed& f2);
 
 };
 
