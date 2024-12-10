@@ -14,7 +14,7 @@ class ClapTrap {
 	public:
 		ClapTrap();
 		ClapTrap( const std::string clapTrapName );
-		ClapTrap( const ClapTrap& f);
+		ClapTrap( const ClapTrap& c);
 		ClapTrap& operator= ( const ClapTrap& c);
 		~ClapTrap();
 
