@@ -4,7 +4,7 @@
 
 ClapTrap::ClapTrap(const std::string clapTrapName) : _name(clapTrapName), 
 	_hitPoints(10), _energyPoints(10), _attackDamage(0) {
-		std::cout << "ClapTrap Constructor called" << std::endl;
+		std::cout << "ClapTrap Named Constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap() : _name(""), _hitPoints(10), _energyPoints(10),
@@ -27,7 +27,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &c) {
 }
 
 ClapTrap::~ClapTrap(void) {
-	std::cout << "Default destructor called" << std::endl;
+	std::cout << "ClapTrap Default destructor called" << std::endl;
 }
 
 // MEMBER FUNCTIONS
@@ -48,7 +48,7 @@ void ClapTrap::takeDamage(unsigned int amount) {
 
 	_hitPoints -= amount;
 	std::cout << "ClaptTrap " << _name << " got hit, causing " << amount 
-	<< " points of damage." << std::endl;
+	<< " points of damage, and now got " << _hitPoints << " left." << std::endl;
 
 	if ( _hitPoints <= 0 )
 	{
@@ -64,8 +64,44 @@ void ClapTrap::beRepaired(unsigned int amount) {
 		_energyPoints -= 1;
 		_hitPoints += amount;
 		std::cout << "ClapTrap " << _name << " repaired itself, getting " << amount
-		<< " points back." << std::endl;
+		<< " points back, and now got " << _energyPoints << " left." << std::endl;
 	}
 	else 
 		std::cout << "ClapTrap " << _name << " has not enough energy points." << std::endl;	
+}
+
+// SETTERS
+
+void ClapTrap::setName( const std::string& clapTrapName ) {
+	_name = clapTrapName;
+}
+
+void ClapTrap::setHitPoints( unsigned int amount ) {
+	_hitPoints = amount;
+}
+
+void ClapTrap::setEnergyPoints( unsigned int amount ) {
+	_energyPoints = amount;
+}
+
+void ClapTrap::setAttackDamage( unsigned int amount ) {
+	_attackDamage = amount;
+}
+
+// GETTERS
+
+const std::string& ClapTrap::getName() const {
+	return _name;
+}
+
+unsigned int ClapTrap::getHitPoints() const {
+	return _hitPoints;
+}
+
+unsigned int ClapTrap::getEnergyPoints() const {
+	return _energyPoints;
+}
+
+unsigned int ClapTrap::getAttackDamage() const {
+	return _attackDamage;
 }

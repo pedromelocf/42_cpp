@@ -15,6 +15,7 @@ class ScavTrap : public ClapTrap {
 
 		void guardGate();
 		void attack( const std::string& target );
+
 };
 
 #endif
