@@ -23,10 +23,12 @@ static void testAttack () {
     ClapTrap sett("Sett");
     ClapTrap empty;
 
+	std::cout << std::endl;
+
     sett.attack("Tim");
     empty.attack("Sett");
 
-    std::cout << "-----Attack test end-----" << std::endl ;    
+    std::cout << std::endl << "-----Attack test end-----" << std::endl ;
 }
 
 static void testDamage () {
@@ -35,10 +37,12 @@ static void testDamage () {
 
     ClapTrap dalle("Dalle");
 
+	std::cout << std::endl;
+
     dalle.takeDamage(5);
     dalle.takeDamage(5);
 
-    std::cout << "-----Damage test end-----" << std::endl;    
+    std::cout << std::endl <<  "-----Damage test end-----" << std::endl;
 }
 
 static void testRepaired () {
@@ -46,15 +50,13 @@ static void testRepaired () {
     std::cout << std::endl << "-----Repaired test-----" << std::endl;    
     
     ClapTrap brooks("Brooks");
-    ClapTrap assig;
 
-    assig = brooks;
+	std::cout << std::endl;
 
     brooks.beRepaired(3);
     brooks.beRepaired(1000);
-    assig.beRepaired(1);
 
-    std::cout << "-----Repaired test end-----" << std::endl ;    
+    std::cout << std::endl << "-----Repaired test end-----" << std::endl ;
 }
 
 static void testEnergyPoints () {
@@ -63,7 +65,9 @@ static void testEnergyPoints () {
 
     ClapTrap tired("Tired");
 
-    tired.attack("Tim");
+    std::cout << std::endl;
+
+	tired.attack("Tim");
     tired.attack("Brooks");
     tired.attack("Kevin");
     tired.attack("Denis");
@@ -75,7 +79,7 @@ static void testEnergyPoints () {
     tired.beRepaired(4);
     tired.beRepaired(2);
 
-    std::cout << "-----Energy Point test end-----" << std::endl;    
+    std::cout << std::endl << "-----Energy Point test end-----" << std::endl;
 }
 
 

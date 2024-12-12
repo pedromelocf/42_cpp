@@ -2,6 +2,16 @@
 
 // CONSTRUCTOR AND DESTRUCTOR
 
+ScavTrap::ScavTrap() {
+
+	setName("");
+	setHitPoints(100);
+	setEnergyPoints(50);
+	setAttackDamage(20);
+	std::cout << "ScavTrap Default constructor called" << std::endl;
+
+}
+
 ScavTrap::ScavTrap(const std::string scavTrapName) {
 
 	setName(scavTrapName);
@@ -12,18 +22,11 @@ ScavTrap::ScavTrap(const std::string scavTrapName) {
 
 }
 
-ScavTrap::ScavTrap() {
-
-	setHitPoints(100);
-	setEnergyPoints(50);
-	setAttackDamage(20);
-	std::cout << "ScavTrap Default constructor called" << std::endl;
-
-}
-
 ScavTrap::ScavTrap(const ScavTrap &s) {
+
 	*this = s;
 	std::cout << "ScavTrap Copy constructor called" << std::endl;
+
 }
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &s) {
@@ -37,7 +40,7 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &s) {
 
 }
 
-ScavTrap::~ScavTrap(void) {
+ScavTrap::~ScavTrap() {
 	std::cout << "ScavTrap Default destructor called" << std::endl;
 }
 

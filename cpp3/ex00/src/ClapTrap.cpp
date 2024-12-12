@@ -2,7 +2,7 @@
 
 // CONSTRUCTOR AND DESTRUCTOR
 
-ClapTrap::ClapTrap(const std::string clapTrapName) : _name(clapTrapName), 
+ClapTrap::ClapTrap(const std::string& clapTrapName) : _name(clapTrapName),
 	_hitPoints(10), _energyPoints(10), _attackDamage(0) {
 		std::cout << "Constructor called" << std::endl;
 }
@@ -47,8 +47,8 @@ void ClapTrap::attack(const std::string &target) {
 void ClapTrap::takeDamage(unsigned int amount) {
 
 	_hitPoints -= amount;
-	std::cout << "ClaptTrap " << _name << " got hit, causing " << amount 
-	<< " points of damage." << std::endl;
+	std::cout << "ClaptTrap " << _name << " got hit, causing " << amount
+	<< " points of damage, and now got " << _hitPoints << " left." << std::endl;
 
 	if ( _hitPoints <= 0 )
 	{
@@ -64,7 +64,7 @@ void ClapTrap::beRepaired(unsigned int amount) {
 		_energyPoints -= 1;
 		_hitPoints += amount;
 		std::cout << "ClapTrap " << _name << " repaired itself, getting " << amount
-		<< " points back." << std::endl;
+		<< " points back, and now got " << _hitPoints << " left." << std::endl;
 	}
 	else 
 		std::cout << "ClapTrap " << _name << " has not enough energy points." << std::endl;	

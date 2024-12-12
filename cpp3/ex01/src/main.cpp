@@ -114,7 +114,7 @@ static void testEnergyPoints () {
 	std::cout << scav.getName() << " has " << scav.getEnergyPoints() << " energy points left." << std::endl << std::endl;
 
 	ClapTrap clap("Peacekeeper");
-	std::cout  << clap.getName() << " has " << clap.getEnergyPoints() << "  energy points left." << std::endl << std::endl;
+	std::cout  << clap.getName() << " has " << clap.getEnergyPoints() << " energy points left." << std::endl << std::endl;
 
     std::cout << "-----Energy Point test end-----" << std::endl;
 }
