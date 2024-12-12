@@ -70,6 +70,12 @@ static void testIndividualities() {
 	clap.attack("Michael");
 	std::cout << std::endl;
 
+	frag.highFiveGuys();
+	std::cout << std::endl;
+
+//	clap.highFiveGuys();
+//	std::cout << std::endl;
+
 	std::cout << "-----Individualities test end-----" << std::endl ;
 
 }

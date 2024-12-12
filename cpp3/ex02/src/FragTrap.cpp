@@ -31,21 +31,28 @@ FragTrap::FragTrap(const FragTrap &f) {
 
 FragTrap &FragTrap::operator=(const FragTrap &f) {
 
-	setName(f.getName());
-	setHitPoints(f.getHitPoints());
-	setEnergyPoints(f.getEnergyPoints());
-	setAttackDamage(f.getAttackDamage());
+	if (this != &f) {
+		setName(f.getName());
+		setHitPoints(f.getHitPoints());
+		setEnergyPoints(f.getEnergyPoints());
+		setAttackDamage(f.getAttackDamage());
+	}
 	std::cout << "FragTrap Copy assignment operator called" << std::endl;
 	return *this;
 
 }
 
-// MEMBERS FUNCTIONS
-
 FragTrap::~FragTrap() {
 	std::cout << "FragTrap Destructor Called" << std::endl;
 }
 
+// MEMBERS FUNCTIONS
+
 void FragTrap::highFiveGuys() {
-	std::cout << "High five guys" << std::endl;
+	if (getEnergyPoints() > 0) {
+		setEnergyPoints(getEnergyPoints() - 1);
+		std::cout << getName() << " says: High five guys ! " << std::endl;
+	}
+	else
+		std::cout << getName() << " does not have enought energy points to High Five." << std::endl;
 }

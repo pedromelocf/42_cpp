@@ -31,10 +31,13 @@ ScavTrap::ScavTrap(const ScavTrap &s) {
 
 ScavTrap &ScavTrap::operator=(const ScavTrap &s) {
 
-	setName(s.getName());
-	setHitPoints(s.getHitPoints());
-	setEnergyPoints(s.getEnergyPoints());
-	setAttackDamage(s.getAttackDamage());
+	if (this != &s)
+	{
+		setName(s.getName());
+		setHitPoints(s.getHitPoints());
+		setEnergyPoints(s.getEnergyPoints());
+		setAttackDamage(s.getAttackDamage());
+	}
 	std::cout << "ScavTrap Copy assignment operator called" << std::endl;
 	return *this;
 
