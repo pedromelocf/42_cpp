@@ -1,4 +1,4 @@
-#include "ClapTrap.hpp"
+#include "../includes/ClapTrap.hpp"
 
 static void testAttack ();
 static void testDamage ();

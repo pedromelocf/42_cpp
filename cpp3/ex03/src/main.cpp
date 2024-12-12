@@ -1,5 +1,5 @@
-#include "../includes/ClapTrap.hpp"
-#include "../includes/FragTrap.hpp"
+#include "ClapTrap.hpp"
+#include "FragTrap.hpp"
 
 static void testConstructorDestructor();
 static void testIndividualities();

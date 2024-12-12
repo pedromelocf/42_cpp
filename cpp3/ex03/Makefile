@@ -1,9 +1,9 @@
-NAME = fixedpointer1
+NAME = diamondtrap
 
 CPP_SRC_PATH = ./src/
 CPP_OBJ_PATH = ./src/cpp_object
 
-CPP_INCLUDES = $(wildcard ./src/*.hpp)
+CPP_INCLUDES = $(wildcard ./includes/*.hpp)
 
 CPP_OBJ = $(addprefix $(CPP_OBJ_PATH)/, $(notdir $(CPP_SRCS:.cpp=.o)))
 CPP_SRCS = $(wildcard ./src/*.cpp)

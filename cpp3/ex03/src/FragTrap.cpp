@@ -1,4 +1,4 @@
-#include "../includes/FragTrap.hpp"
+#include "FragTrap.hpp"
 
 // CONSTRUCTOR AND DESTRUCTOR
 
