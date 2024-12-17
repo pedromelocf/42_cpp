@@ -17,6 +17,8 @@ int main() {
 	testCatDeepCopies();
 	testDogDeepCopies();
 
+//	AAnimal animal;
+
   	return 0;
 }
 
@@ -24,7 +26,7 @@ static void testConstructorDestructor( ) {
 
     std::cout << "-----*---- TESTING CONSTRUCTORS AND DESTRUCTORS -----*----" << std::endl;
 
-    Animal** a = new Animal*[4];
+    AAnimal** a = new AAnimal*[4];
 
 	std::cout << " -*- CREATING DOG INSTANCES -*- " << std::endl;
 
