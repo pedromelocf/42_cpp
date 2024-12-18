@@ -26,11 +26,6 @@ AAnimal::~AAnimal() {
 
 // MEMBER FUNCTIONS
 
-void AAnimal::makeSound() const {
-
-	std::cout << "Class Animal does not make specific sounds" << std::endl;
-}
-
 const std::string AAnimal::getType() const {
 
 	return type;
