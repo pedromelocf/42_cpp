@@ -9,12 +9,11 @@ int main() {
     Bureaucrat adailton("Adailton", 150);
     try
     {
-        std::cout << adailton.getName() << std::endl;
-        std::cout << adailton.getGrade() << std::endl;
+        std::cout << adailton << std::endl;
         adailton.incrementGrade();
-        std::cout << adailton.getGrade() << std::endl;
+        std::cout << adailton << std::endl;
         adailton.decrementGrade();
-        std::cout << adailton.getGrade() << std::endl;
+        std::cout << adailton << std::endl;
         adailton.decrementGrade();
     }
     catch(const std::exception& e)
@@ -27,12 +26,11 @@ int main() {
     Bureaucrat roberto("Roberto", 1);
     try
     {
-        std::cout << roberto.getName() << std::endl;
-        std::cout << roberto.getGrade() << std::endl;
+        std::cout << roberto << std::endl;
         roberto.decrementGrade();
-        std::cout << roberto.getGrade() << std::endl;
+        std::cout << roberto << std::endl;
         roberto.incrementGrade();
-        std::cout << roberto.getGrade() << std::endl;
+        std::cout << roberto << std::endl;
         roberto.incrementGrade();
     }
     catch(const std::exception& e) {
@@ -43,16 +41,14 @@ int main() {
 
     Bureaucrat jose(roberto);
     try {
-        std::cout << jose.getName() << std::endl;
-        std::cout << jose.getGrade() << std::endl;
+        std::cout << jose << std::endl;
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl; 
     }
 
     jose = adailton;
     try {
-        std::cout << jose.getName() << std::endl;
-        std::cout << jose.getGrade() << std::endl;
+        std::cout << jose << std::endl;
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl; 
     }

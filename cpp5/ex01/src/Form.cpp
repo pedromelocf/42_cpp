@@ -7,7 +7,7 @@ Form::Form()
 	std::cout << "Form Default constructor called" << std::endl;
 }
 
-Form::Form(const std::string& name, unsigned short int gradeToSign, unsigned short int gradeToExec)
+Form::Form(const std::string& name, int gradeToSign, int gradeToExec)
     : _name(name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExec(gradeToExec){
     if (gradeToSign < 1 || gradeToExec < 1)
         throw GradeTooHighException();
@@ -43,11 +43,11 @@ bool Form::boolCheckSign() const {
     return _isSigned;
 }
 
-unsigned short int Form::reqGradeToSign() const {
+int Form::reqGradeToSign() const {
     return _gradeToSign;
 }
 
-unsigned short int Form::reqGradeToExec() const {
+int Form::reqGradeToExec() const {
     return _gradeToExec;
 }
 
@@ -62,4 +62,13 @@ void Form::beSigned(Bureaucrat& b) {
         std::cout << b.getName() << " couldn´t sign " << this->getName() <<" because form is already signed."  << std::endl;
     else 
         std::cout << b.getName() << " couldn´t sign " << this->getName() <<" because grade is to low."  << std::endl;
+}
+
+std::ostream& operator<< ( std::ostream& os, const Form& f) {
+    if (f.boolCheckSign() == true)
+	    os << f.getName() << ", grade to sign " << f.reqGradeToSign() << ", grade to execute " << f.reqGradeToExec() << " is signed" << ".";
+    else 
+        os << f.getName() << ", grade to sign " << f.reqGradeToSign() << ", grade to execute " << f.reqGradeToExec() << " is not signed" << ".";
+
+    return os;
 }
