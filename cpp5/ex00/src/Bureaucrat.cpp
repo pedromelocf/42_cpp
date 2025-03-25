@@ -1,6 +1,4 @@
 #include "../includes/Bureaucrat.hpp"
-#include "../includes/GradeTooHighException.hpp"
-#include "../includes/GradeTooLowException.hpp"
 
 // CONSTRUCTOR AND DESTRUCTOR
 
@@ -11,11 +9,7 @@ Bureaucrat::Bureaucrat()
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade)
     : _name(name) {
-    if (grade < 1)
-        throw GradeTooHighException();
-    if (grade > 150)
-        throw GradeTooLowException();
-    _grade = grade;
+    this->setGrade(grade);
     std::cout << "Bureaucrat Named constructor called" << std::endl;
 }
 
@@ -26,7 +20,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &b)
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &b){
     if (this != &b) {
-        _grade = b.getGrade();
+        this->setGrade(b.getGrade());
     }
 	std::cout << "Bureaucrat Copy assignment operator called" << std::endl;
 	return *this;
@@ -42,25 +36,38 @@ const std::string& Bureaucrat::getName() const {
     return _name;
 }
 
-
 int Bureaucrat::getGrade() const {
     return _grade;
 }
 
+void Bureaucrat::setGrade(int grade) {
+    if (grade < 1)
+        throw Bureaucrat::GradeTooHighException();
+    if (grade > 150)
+        throw Bureaucrat::GradeTooLowException();
+    _grade = grade;
+}
+
 void Bureaucrat::incrementGrade() {
 
-    if (_grade - 1 == 0)
-        throw GradeTooHighException();
+    this->setGrade(this->getGrade() - 1);
     std::cout << "Grade incremented" << std::endl;
-    _grade--;
 }
 
 void Bureaucrat::decrementGrade() {
 
-    if (_grade + 1 == 151)
-        throw GradeTooLowException();
+    this->setGrade(this->getGrade() + 1);
     std::cout << "Grade decremented" << std::endl;
-    _grade++;
+}
+
+// EXCEPTION 
+
+const char *Bureaucrat::GradeTooHighException::what() const throw() {
+    return "Grade too high";
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const throw() {
+    return "Grade too low";
 }
 
 // OVERLOAD << TO STDOUT

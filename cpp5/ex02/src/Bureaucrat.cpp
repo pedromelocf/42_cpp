@@ -1,4 +1,5 @@
 #include "../includes/Bureaucrat.hpp"
+#include "../includes/AForm.hpp"
 
 // CONSTRUCTOR AND DESTRUCTOR
 
@@ -58,6 +59,19 @@ void Bureaucrat::decrementGrade() {
         throw GradeTooLowException();
     std::cout << "Grade decremented" << std::endl;
     _grade++;
+}
+
+void Bureaucrat::executeForm(AForm const & f) {
+    if (this->getGrade() <= f.reqGradeToSign() && f.boolCheckSign() == true) {
+        f.execute(*this);
+        std::cout << this->getName() << " executed " << f.getName() << std::endl;
+    }
+    else if (this->getGrade() <= f.reqGradeToSign())
+        std::cout << f.getName() << " is not signed." << std::endl;
+    else if (this->getGrade() > f.reqGradeToSign() && f.boolCheckSign() == false)
+        std::cout << this->getName() << " does not have grade required to execute, and the form " << f.getName() << " is not signed." << std::endl;
+    else
+        std::cout << this->getName() << " does not have grade required to execute the form " << f.getName() << std::endl;
 }
 
 // EXCEPTION 

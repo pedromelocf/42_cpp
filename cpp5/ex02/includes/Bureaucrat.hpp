@@ -3,7 +3,9 @@
 
 #include <iostream>
 #include <string>
+#include <stdexcept>
 
+class AForm;
 class Bureaucrat 
 {
     private:
@@ -13,16 +15,16 @@ class Bureaucrat
     public:
         Bureaucrat();
         Bureaucrat(const std::string& name, int grade);
-        Bureaucrat(const Bureaucrat& b);
-        Bureaucrat& operator= (const Bureaucrat& b); 
+        Bureaucrat(const Bureaucrat & b);
+        Bureaucrat& operator= (const Bureaucrat & b); 
         ~Bureaucrat();
 
         const std::string& getName() const;
         int getGrade() const;
-        void setGrade(int grade); 
 
         void incrementGrade();
         void decrementGrade();
+        void executeForm(AForm const & f);
 
         class GradeTooHighException : public std::exception {
             public:
