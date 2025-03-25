@@ -6,6 +6,7 @@
 #include <stdexcept>
 
 class AForm;
+
 class Bureaucrat 
 {
     private:

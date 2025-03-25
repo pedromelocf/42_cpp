@@ -5,6 +5,7 @@
 #include <string>
 
 class Bureaucrat;
+
 class AForm {
     private:
         const std::string _name;
@@ -35,7 +36,7 @@ class AForm {
                 const char *what() const throw();
         };
 
-        class FormAlreadySignException : public std::exception {
+        class FormNotSignedException : public std::exception {
             public:
                 const char *what() const throw();
         };

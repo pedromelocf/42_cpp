@@ -4,9 +4,7 @@
 // CONSTRUCTOR AND DESTRUCTOR
 
 AForm::AForm()
-    : _name(""), _isSigned(false), _gradeToSign(1), _gradeToExec(1) {
-	std::cout << "AForm Default constructor called" << std::endl;
-}
+    : _name(""), _isSigned(false), _gradeToSign(1), _gradeToExec(1) {}
 
 AForm::AForm(const std::string& name, int gradeToSign, int gradeToExec)
     : _name(name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExec(gradeToExec){
@@ -14,25 +12,19 @@ AForm::AForm(const std::string& name, int gradeToSign, int gradeToExec)
         throw Bureaucrat::GradeTooHighException();
     if (gradeToSign > 150 || gradeToExec > 150)
         throw Bureaucrat::GradeTooLowException();
-    std::cout << "AForm constructor called" << std::endl;
 }
 
 AForm::AForm(const AForm &f)
-    : _name(f.getName()), _isSigned(f.boolCheckSign()), _gradeToSign(f.reqGradeToSign()), _gradeToExec(f.reqGradeToExec()) {
-	std::cout << "AForm Copy constructor called" << std::endl;
-}
+    : _name(f.getName()), _isSigned(f.boolCheckSign()), _gradeToSign(f.reqGradeToSign()), _gradeToExec(f.reqGradeToExec()) {}
 
 AForm &AForm::operator=(const AForm &f){
     if (this != &f) {
         _isSigned = f.boolCheckSign();
     }
-	std::cout << "AForm Copy assignment operator called" << std::endl;
 	return *this;
 }
 
-AForm::~AForm() {
-	std::cout << "AForm Default destructor called" << std::endl;
-}
+AForm::~AForm() {}
 
 // MEMBER FUNCTIONS
 
@@ -62,16 +54,16 @@ void AForm::beSigned(Bureaucrat& b) {
         std::cout << b.getName() << " signed " << this->getName() << std::endl;
     }
     else if (this->boolCheckSign() == true && b.getGrade() > this->reqGradeToSign())
-        std::cout << b.getName() << " couldn´t sign " << this->getName() <<" because Aform is already signed and grade is to low."  << std::endl;
+        std::cout << b.getName() << " couldn´t sign " << this->getName() <<" because form is already signed and grade is to low."  << std::endl;
     else if (this->boolCheckSign() == true)
-        std::cout << b.getName() << " couldn´t sign " << this->getName() <<" because Aform is already signed."  << std::endl;
+        std::cout << b.getName() << " couldn´t sign " << this->getName() <<" because form is already signed."  << std::endl;
     else 
         std::cout << b.getName() << " couldn´t sign " << this->getName() <<" because grade is to low."  << std::endl;
 }
 
 void AForm::checkRequirementsToExecute(Bureaucrat const & executor) const{
     if (boolCheckSign() == false)
-        throw FormAlreadySignException();
+        throw FormNotSignedException();
     if (executor.getGrade() >= reqGradeToExec())
         throw GradeTooLowException();
 }
@@ -79,11 +71,11 @@ void AForm::checkRequirementsToExecute(Bureaucrat const & executor) const{
 // EXCEPTION 
 
 const char *AForm::GradeTooLowException::what() const throw() {
-    return "Grade too low to sign form.";
+    return "Grade too low to execute form.";
 }
 
-const char *AForm::FormAlreadySignException::what() const throw() {
-    return "Form is already signed.";
+const char *AForm::FormNotSignedException::what() const throw() {
+    return "Form is not signed.";
 }
 
 // OVERLOAD << TO STDOUT

@@ -3,23 +3,32 @@
 // CONSTRUCTOR AND DESTRUCTOR
 
 PresidentialPardonForm::PresidentialPardonForm()
-    : AForm("PresidentialPardonForm", 145, 137), _target("") {}
+    : AForm("PresidentialPardonForm", 25, 5), _target("") {
+    std::cout << "PresidentialPardonForm Default constructor called" << std::endl;
+    }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string & target)
-    : AForm("PresidentialPardonForm", 145, 137), _target(target) {}
+    : AForm("PresidentialPardonForm", 25, 5), _target(target) {
+    std::cout << "PresidentialPardonForm constructor called" << std::endl;
+    }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &p)
-    : AForm(p), _target(p._target) {}
+    : AForm(p), _target(p._target) {
+    std::cout << "PresidentialPardonForm Copy constructor called" << std::endl;
+    }
 
 PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &p){
     if (this != &p) {
         setTarget(p.getTarget());
         setSigned(p.boolCheckSign()); 
     }
+    std::cout << "PresidentialPardonForm Copy assignment operator called" << std::endl;
 	return *this;
 }
 
-PresidentialPardonForm::~PresidentialPardonForm() {}
+PresidentialPardonForm::~PresidentialPardonForm() {
+    std::cout << "PresidentialPardonForm Default destructor called" << std::endl;
+}
 
 // MEMBER FUNCTIONS
 

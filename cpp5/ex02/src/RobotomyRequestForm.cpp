@@ -4,23 +4,32 @@
 // CONSTRUCTOR AND DESTRUCTOR
 
 RobotomyRequestForm::RobotomyRequestForm()
-    : AForm("RobotomyRequestForm", 72, 45), _target("") {}
+    : AForm("RobotomyRequestForm", 72, 45), _target("") {
+    std::cout << "RobotomyRequestForm Default constructor called" << std::endl;
+    }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string & target)
-    : AForm("RobotomyRequestForm", 72, 45), _target(target) {}
+    : AForm("RobotomyRequestForm", 72, 45), _target(target) {
+    std::cout << "RobotomyRequestForm constructor called" << std::endl;
+    }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &r)
-    : AForm(r), _target(r._target) {}
+    : AForm(r), _target(r._target) {
+    std::cout << "RobotomyRequestForm Copy constructor called" << std::endl;
+    }
 
 RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &r){
     if (this != &r) {
         setTarget(r.getTarget());
         setSigned(r.boolCheckSign()); 
     }
+    std::cout << "RobotomyRequestForm Copy assignment operator called" << std::endl;
 	return *this;
 }
 
-RobotomyRequestForm::~RobotomyRequestForm() {}
+RobotomyRequestForm::~RobotomyRequestForm() {
+    std::cout << "RobotomyRequestForm Default destructor called" << std::endl;
+}
 
 // MEMBER FUNCTIONS
 
