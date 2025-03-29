@@ -1,5 +1,5 @@
+#include "../includes/Form.hpp"
 #include "../includes/Bureaucrat.hpp"
-
 // CONSTRUCTOR AND DESTRUCTOR
 
 Bureaucrat::Bureaucrat()
@@ -60,7 +60,7 @@ void Bureaucrat::decrementGrade() {
     _grade++;
 }
 
-// EXCEPTION 
+// EXCEPTION
 
 const char *Bureaucrat::GradeTooHighException::what() const throw() {
     return "Grade too high";
@@ -68,6 +68,10 @@ const char *Bureaucrat::GradeTooHighException::what() const throw() {
 
 const char *Bureaucrat::GradeTooLowException::what() const throw() {
     return "Grade too low";
+}
+
+void Bureaucrat::signForm(Form& f) {
+    f.beSigned(*this);
 }
 
 // OVERLOAD << TO STDOUT

@@ -1,4 +1,5 @@
 #include "../includes/Form.hpp"
+#include "../includes/Bureaucrat.hpp"
 
 // CONSTRUCTOR AND DESTRUCTOR
 
@@ -53,21 +54,21 @@ int Form::reqGradeToExec() const {
 
 void Form::beSigned(Bureaucrat& b) {
     if (b.getGrade() <= this->reqGradeToSign() && this->boolCheckSign() == false) {
-        this->_isSigned = true;
+        _isSigned = true;
         std::cout << b.getName() << " signed " << this->getName() << std::endl;
     }
     else if (this->boolCheckSign() == true && b.getGrade() > this->reqGradeToSign())
         std::cout << b.getName() << " couldn´t sign " << this->getName() <<" because form is already signed and grade is to low."  << std::endl;
     else if (this->boolCheckSign() == true)
         std::cout << b.getName() << " couldn´t sign " << this->getName() <<" because form is already signed."  << std::endl;
-    else 
+    else
         std::cout << b.getName() << " couldn´t sign " << this->getName() <<" because grade is to low."  << std::endl;
 }
 
 std::ostream& operator<< ( std::ostream& os, const Form& f) {
     if (f.boolCheckSign() == true)
 	    os << f.getName() << ", grade to sign " << f.reqGradeToSign() << ", grade to execute " << f.reqGradeToExec() << " is signed" << ".";
-    else 
+    else
         os << f.getName() << ", grade to sign " << f.reqGradeToSign() << ", grade to execute " << f.reqGradeToExec() << " is not signed" << ".";
 
     return os;

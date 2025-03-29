@@ -74,7 +74,7 @@ void Bureaucrat::executeForm(AForm const & f) {
         std::cout << this->getName() << " does not have grade required to execute the form " << f.getName() << std::endl;
 }
 
-// EXCEPTION 
+// EXCEPTION
 
 const char *Bureaucrat::GradeTooHighException::what() const throw() {
     return "Grade too high";
@@ -82,6 +82,10 @@ const char *Bureaucrat::GradeTooHighException::what() const throw() {
 
 const char *Bureaucrat::GradeTooLowException::what() const throw() {
     return "Grade too low";
+}
+
+void Bureaucrat::signForm(AForm& f) {
+    f.beSigned(*this);
 }
 
 // OVERLOAD << TO STDOUT
