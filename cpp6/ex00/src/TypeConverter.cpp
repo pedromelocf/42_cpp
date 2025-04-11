@@ -15,19 +15,22 @@ TypeConverter::~TypeConverter() {}
 
 int TypeConverter::typecheck (std::string & s) {
 
-    if (s.length() == 1 && std::isalpha(s[0])) 
-        return 0;
-
-    else if ()
-    
-    else if ()
-    else if () 
-    else if (s == "nanf" || s == "+inff" || s == "-inff")
+    if (s == "nanf" || s == "+inff" || s == "-inff")
         return 4;
-
-    else if (s == "nan" || s == "+inf" || s == "-inf")
+    if (s == "nan" || s == "+inf" || s == "-inf")
         return 5;
 
+    bool validliteral = TypeConverter::checkdigits(s);
+    if (validliteral == true) {
+
+        if (s.length() == 1 && std::isalpha(s[0])) 
+            return 0;
+        if (s.find('.') != std::string::npos && s.find('f') != std::string::npos)
+            return 3;
+        if (s.find('.') != std::string::npos)
+            return 2;
+        return 1;
+    }
     return 6;
 }
 
@@ -63,7 +66,7 @@ void TypeConverter::displayconversion (char c) {
 void TypeConverter::displayconversion (int i) {
 
     if (std::isprint(static_cast<char>(i)))
-        std::cout << "char: '" << i << "'" << std::endl;
+        std::cout << "char: '" << static_cast<char>(i) << "'" << std::endl;
     else
         std::cout << "char: Non displayable" << std::endl;
     std::cout << "int: " << i << std::endl;
@@ -73,7 +76,10 @@ void TypeConverter::displayconversion (int i) {
 
 void TypeConverter::displayconversion (float f) {
 
-    std::cout << "char: '" << static_cast<char>(f) << std::endl;
+    if (std::isprint(static_cast<char>(f)))
+        std::cout << "char: '" << static_cast<char>(f) << "'" << std::endl;
+    else
+        std::cout << "char: Non displayable" << std::endl;
     std::cout << "int: " << static_cast<int>(f) << std::endl;
     std::cout << "float: " << f << "f" << std::endl;
     std::cout << "double: " << static_cast<double>(f) << std::endl;
@@ -81,7 +87,10 @@ void TypeConverter::displayconversion (float f) {
 
 void TypeConverter::displayconversion (double d) {
 
-    std::cout << "char: '" << static_cast<char>(d) << std::endl;
+    if (std::isprint(static_cast<char>(d)))
+        std::cout << "char: '" << static_cast<char>(d) << "'" << std::endl;
+    else
+        std::cout << "char: Non displayable" << std::endl;
     std::cout << "int: " << static_cast<int>(d) << std::endl;
     std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
     std::cout << "double: " << d << std::endl;
@@ -89,7 +98,7 @@ void TypeConverter::displayconversion (double d) {
 
 void TypeConverter::displaypseudo (float f) {
 
-    std::cout << "char: '" << "impossible" << std::endl;
+    std::cout << "char: " << "impossible" << std::endl;
     std::cout << "int: " << "impossible" << std::endl;
     std::cout << "float: " << f << "f" << std::endl;
     std::cout << "double: " << static_cast<double>(f) << std::endl;
@@ -97,8 +106,41 @@ void TypeConverter::displaypseudo (float f) {
 
 void TypeConverter::displaypseudo (double d) { 
 
-    std::cout << "char: '" << "impossible" << std::endl;
+    std::cout << "char: " << "impossible" << std::endl;
     std::cout << "int: " << "impossible" << std::endl;
     std::cout << "float: " << static_cast<float>(d) << "f" <<std::endl;
     std::cout << "double: " << d << std::endl;
+}
+
+bool TypeConverter::checkdigits (std::string & s) {
+
+    int dotCount = 0;
+    int fCount = 0;
+    long unsigned int i = 0;
+
+    for (i = 0; i < s.length(); i++) {
+
+        if (std::isdigit(s[i]))
+            continue;
+        else if (s[i] == '.') {
+            dotCount++;
+            if (dotCount > 1)
+                return false;
+        }
+        else if (s[i] == 'f') {
+            fCount++;
+            if (fCount > 1 || i != s.length() - 1)
+                return false;
+        }
+        else if (s[i] == '+' || s[i] == '-') {
+            if (i != 0)
+                return false;
+        }
+        else
+            return false;
+    }
+    if ((s[i - 1] == '.') || (fCount == 1 && dotCount == 0) || (s[i - 1] == 'f' && s[i - 2] == '.'))
+        return false;
+
+    return true;
 }

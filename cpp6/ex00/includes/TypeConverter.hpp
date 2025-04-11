@@ -6,6 +6,7 @@
 #include <sstream>
 #include <cctype>
 #include <cmath> 
+#include <limits>
 
 class TypeConverter {
 
@@ -29,6 +30,8 @@ class TypeConverter {
         static void displayconversion(double d);
         static void displaypseudo(float f);
         static void displaypseudo(double d);
+
+        static bool checkdigits (std::string & s);
 };
 
 #endif

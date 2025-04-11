@@ -28,35 +28,30 @@ void ScalarConverter::convert (const char * s) {
         }
         
         case 1:{
-
             int i = TypeConverter::convertint(literal);
             TypeConverter::displayconversion(i);
             break;
         }
         
         case 2:{
-
             double d = TypeConverter::convertdouble(literal);
             TypeConverter::displayconversion(d);
             break;
         }
 
         case 3: {
-
             float f = TypeConverter::convertfloat(literal);
             TypeConverter::displayconversion(f);
             break;
         }
 
         case 4: {
-
             float pf = TypeConverter::convertfloat(literal);
             TypeConverter::displaypseudo(pf);
             break;
         }
 
         case 5:{
-            
             double pd = TypeConverter::convertdouble(literal);
             TypeConverter::displaypseudo(pd);
             break;
