@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <cctype>
+#include <cmath> 
 
 class TypeConverter {
 
@@ -19,8 +22,6 @@ class TypeConverter {
         static int convertint (std::string & s);
         static double convertdouble (std::string & s);
         static float convertfloat (std::string & s);
-        static float convertpseudofloat (std::string & s);
-        static double convertpseudodouble (std::string & s);
 
         static void displayconversion(char c);
         static void displayconversion(int i);

@@ -14,55 +14,68 @@ TypeConverter &TypeConverter::operator= (const TypeConverter & t) {
 TypeConverter::~TypeConverter() {}
 
 int TypeConverter::typecheck (std::string & s) {
-    static_cast<void>(&s);
-    return 0;
+
+    if (s.length() == 1 && std::isalpha(s[0])) 
+        return 0;
+
+    else if ()
+    
+    else if ()
+    else if () 
+    else if (s == "nanf" || s == "+inff" || s == "-inff")
+        return 4;
+
+    else if (s == "nan" || s == "+inf" || s == "-inf")
+        return 5;
+
+    return 6;
 }
 
 char TypeConverter::convertchar (std::string & s) {
-    static_cast<void>(&s);
+    return s[0];
 }
 
 int TypeConverter::convertint (std::string & s) {
-    static_cast<void>(&s);
+    int i;
+    std::istringstream(s) >> i;
+    return i;
 }
 
 double TypeConverter::convertdouble (std::string & s) {
-    static_cast<void>(&s);
+    return atof(s.c_str());
 }
 
 float TypeConverter::convertfloat (std::string & s) {
-    static_cast<void>(&s);
-}
-
-float TypeConverter::convertpseudofloat (std::string & s) {
-
-}
-
-double TypeConverter::convertpseudodouble (std::string & s) {
-
+    return atof(s.c_str());
 }
 
 void TypeConverter::displayconversion (char c) {
 
-    std::cout << "char: '" << c << std::endl;
+    if (std::isprint(c))
+        std::cout << "char: '" << c << "'" << std::endl;
+    else
+        std::cout << "char: Non displayable" << std::endl;
     std::cout << "int: " << static_cast<int>(c) << std::endl;
-    std::cout << "float: " << static_cast<float>(c) << std::endl;
-    std::cout << "double: " << static_cast<double>(c) << std::endl;
+    std::cout << "float: " << static_cast<float>(c) << ".0f" << std::endl;
+    std::cout << "double: " << static_cast<double>(c) << ".0" << std::endl;
 }
 
 void TypeConverter::displayconversion (int i) {
 
-    std::cout << "char: '" << static_cast<int>(i) << std::endl;
+    if (std::isprint(static_cast<char>(i)))
+        std::cout << "char: '" << i << "'" << std::endl;
+    else
+        std::cout << "char: Non displayable" << std::endl;
     std::cout << "int: " << i << std::endl;
-    std::cout << "float: " << static_cast<float>(i) << std::endl;
-    std::cout << "double: " << static_cast<double>(i) << std::endl;
+    std::cout << "float: " << static_cast<float>(i) << ".0f" << std::endl;
+    std::cout << "double: " << static_cast<double>(i) << ".0" << std::endl;
 }
 
 void TypeConverter::displayconversion (float f) {
 
     std::cout << "char: '" << static_cast<char>(f) << std::endl;
     std::cout << "int: " << static_cast<int>(f) << std::endl;
-    std::cout << "float: " << f << std::endl;
+    std::cout << "float: " << f << "f" << std::endl;
     std::cout << "double: " << static_cast<double>(f) << std::endl;
 }
 
@@ -70,22 +83,22 @@ void TypeConverter::displayconversion (double d) {
 
     std::cout << "char: '" << static_cast<char>(d) << std::endl;
     std::cout << "int: " << static_cast<int>(d) << std::endl;
-    std::cout << "float: " << static_cast<float>(d) << std::endl;
+    std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
     std::cout << "double: " << d << std::endl;
 }
 
-void TypeConverter::displaypseudo (float f) { //fix
+void TypeConverter::displaypseudo (float f) {
 
-    std::cout << "char: '" << static_cast<char>(f) << std::endl;
-    std::cout << "int: " << static_cast<int>(f) << std::endl;
-    std::cout << "float: " << static_cast<float>(f) << std::endl;
-    std::cout << "double: " << f << std::endl;
+    std::cout << "char: '" << "impossible" << std::endl;
+    std::cout << "int: " << "impossible" << std::endl;
+    std::cout << "float: " << f << "f" << std::endl;
+    std::cout << "double: " << static_cast<double>(f) << std::endl;
 }
 
-void TypeConverter::displaypseudo (double d) { //fix
+void TypeConverter::displaypseudo (double d) { 
 
-    std::cout << "char: '" << static_cast<char>(d) << std::endl;
-    std::cout << "int: " << static_cast<int>(d) << std::endl;
-    std::cout << "float: " << static_cast<float>(d) << std::endl;
+    std::cout << "char: '" << "impossible" << std::endl;
+    std::cout << "int: " << "impossible" << std::endl;
+    std::cout << "float: " << static_cast<float>(d) << "f" <<std::endl;
     std::cout << "double: " << d << std::endl;
 }
