@@ -81,8 +81,8 @@ void TypeConverter::displayconversion (float f) {
     else
         std::cout << "char: Non displayable" << std::endl;
     std::cout << "int: " << static_cast<int>(f) << std::endl;
-    std::cout << "float: " << f << "f" << std::endl;
-    std::cout << "double: " << static_cast<double>(f) << std::endl;
+    std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+    std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(f) << std::endl;
 }
 
 void TypeConverter::displayconversion (double d) {
@@ -92,8 +92,8 @@ void TypeConverter::displayconversion (double d) {
     else
         std::cout << "char: Non displayable" << std::endl;
     std::cout << "int: " << static_cast<int>(d) << std::endl;
-    std::cout << "float: " << static_cast<float>(d) << "f" << std::endl;
-    std::cout << "double: " << d << std::endl;
+    std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
+    std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
 }
 
 void TypeConverter::displaypseudo (float f) {
