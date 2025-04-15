@@ -12,19 +12,16 @@ int main () {
     std::cout << "raw: " << raw << std::endl << std::endl;
 
     Data* deserialized = Serializer::deserialize(raw);
-
-    if (&data == &(*deserialized))
-        std::cout << "Object and deserialized has same address." << std::endl << std::endl;
-    else 
-        std::cout << "Object and deserialized has different address." << std::endl << std::endl;
-
+    
+    assert (deserialized == &data && "Object and deserialized must have the same address!");
+    
     std::cout << "Object       address: " << &data << std::endl;
-    std::cout << "Deserialized address: " << &(*deserialized) << std::endl << std::endl;
+    std::cout << "Deserialized   value: " << deserialized << std::endl;
+    std::cout << "Deserialized address: " << &deserialized << std::endl << std::endl;
 
     std::cout << "Deserialized Name: " << deserialized->name << std::endl;
     std::cout << "Deserialized Age: " << deserialized->age << std::endl << std::endl;
     std::cout << "Object Name: " << data.name << std::endl;
     std::cout << "Object Age: " << data.age << std::endl;
-
 
 }
