@@ -4,24 +4,20 @@ Base::~Base() {}
 
 Base * generate(void) {
 
-    std::srand(time(0));
-    switch (rand() % 3 + 1) {
-
-        case 1: 
-            std::cout << "A" <<std::endl;
-            return (Base*) new A();
-            break;
+    static bool seed = false;
     
-        case 2:
-            std::cout << "B" << std::endl;
-            return (Base*) new B();
-            break;
+    if (!seed) {
+        seed = true;
+        std::srand(time(0));
+    }
 
+    switch (rand() % 3 + 1) {
+        case 1: 
+            return (Base*) new A();
+        case 2:
+            return (Base*) new B();
         case 3:
-            std::cout << "C" << std::endl;
             return (Base*) new C();
-            break;
-        
         default:
             return NULL;
     }
@@ -31,13 +27,10 @@ void identify(Base* p) {
 
     if (dynamic_cast<A*>(p) != NULL)
         std::cout << "A" << std::endl;
-
     else if (dynamic_cast<B*>(p) != NULL )
         std::cout << "B" << std::endl;
-
     else if (dynamic_cast<C*>(p) != NULL)
         std::cout << "C" << std::endl;
-    
     else
         std::cout << "Unknown type" << std::endl;
 }
@@ -48,28 +41,20 @@ void identify(Base& p) {
         dynamic_cast<A&>(p);
         std::cout << "A" << std::endl;
         return;
-        
-    } catch(const std::exception & e) {
-        std::cerr << e.what() << '\n';
-    }
+    } catch(const std::exception & e) {}
 
     try {
         dynamic_cast<B&>(p);
         std::cout << "B" << std::endl;
         return;
-
-    } catch(const std::exception & e) {
-        std::cerr << e.what() << '\n';
-    }
+    } catch(const std::exception & e) {}
     
     try {
         dynamic_cast<C&>(p);
         std::cout << "C" << std::endl;
         return;
-
     } catch(const std::exception & e) {
-        std::cerr << e.what() << '\n';
+        std::cerr << "Unknown type: " << e.what() << std::endl;
     }
 
-    std::cout << "Unkown type" << std::endl;
 }
