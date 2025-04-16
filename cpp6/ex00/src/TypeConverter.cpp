@@ -23,7 +23,7 @@ int TypeConverter::typecheck (std::string & s) {
     bool validliteral = TypeConverter::checkdigits(s);
     if (validliteral == true) {
 
-        if (s.length() == 1 && std::isalpha(s[0])) 
+        if (s.length() == 1 && std::isprint(s[0]) && !std::isdigit(s[0]))
             return 0;
         if (s.find('.') != std::string::npos && s.find('f') != std::string::npos)
             return 3;
@@ -104,7 +104,7 @@ void TypeConverter::displaypseudo (float f) {
     std::cout << "double: " << static_cast<double>(f) << std::endl;
 }
 
-void TypeConverter::displaypseudo (double d) { 
+void TypeConverter::displaypseudo (double d) {
 
     std::cout << "char: " << "impossible" << std::endl;
     std::cout << "int: " << "impossible" << std::endl;
@@ -136,9 +136,12 @@ bool TypeConverter::checkdigits (std::string & s) {
             if (i != 0)
                 return false;
         }
+        else if (s.length() == 1 && std::isprint(s[0]))
+            return true;
         else
             return false;
     }
+
     if ((s[i - 1] == '.') || (fCount == 1 && dotCount == 0) || (s[i - 1] == 'f' && s[i - 2] == '.'))
         return false;
 

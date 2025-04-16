@@ -1,4 +1,4 @@
-NAME = scalar
+NAME = convert
 
 CPP_SRC_PATH = ./src/
 CPP_OBJ_PATH = ./src/cpp_object
