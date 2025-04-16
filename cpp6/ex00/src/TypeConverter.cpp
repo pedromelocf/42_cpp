@@ -142,7 +142,7 @@ bool TypeConverter::checkdigits (std::string & s) {
             return false;
     }
 
-    if ((s[i - 1] == '.') || (fCount == 1 && dotCount == 0) || (s[i - 1] == 'f' && s[i - 2] == '.'))
+    if ((s[i - 1] == '.' && s.length() != 1) || (fCount == 1 && dotCount == 0) || (s[i - 1] == 'f' && s[i - 2] == '.'))
         return false;
 
     return true;
