@@ -1,4 +1,4 @@
-NAME = scalar
+NAME = array
 
 CPP_SRC_PATH = .
 CPP_OBJ_PATH = cpp_object

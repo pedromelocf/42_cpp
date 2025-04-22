@@ -1,53 +1,57 @@
-#include <iostream>
-#include <Array.hpp>
+#include "Array.hpp"
 
-#define MAX_VAL 750
-int main(int, char**)
+int main()
 {
-    Array<int> numbers(MAX_VAL);
-    int* mirror = new int[MAX_VAL];
-    srand(time(NULL));
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        const int value = rand();
-        numbers[i] = value;
-        mirror[i] = value;
-    }
-    //SCOPE
-    {
-        Array<int> tmp = numbers;
-        Array<int> test(tmp);
-    }
+    std::cout << "   TEST 1: STRING ARRAY " << std:: endl;
+    Array<std::string> arr_str(2);
+    arr_str[0] = "Hello";
+    arr_str[1] = "World";
+    std::cout << "arr_str[0] = '" << arr_str[0] << "'; arr_str[1] = '" << arr_str[1] << "'" << std::endl;
 
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        if (mirror[i] != numbers[i])
-        {
-            std::cerr << "didn't save the same value!!" << std::endl;
-            return 1;
-        }
+    std::cout << std::endl << "   TEST 2: OUT OF RANGE " << std:: endl;
+    try {
+        std::cout << arr_str[2] << std::endl; 
     }
-    try
-    {
-        numbers[-2] = 0;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    try
-    {
-        numbers[MAX_VAL] = 0;
-    }
-    catch(const std::exception& e)
-    {
+    catch(const std::exception& e) {
         std::cerr << e.what() << '\n';
     }
 
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        numbers[i] = rand();
+    std::cout << std::endl << "   TEST 3:  OUT OF RANGE " << std:: endl;
+    try {
+        std::cout << arr_str[-1] << std::endl; 
     }
-    delete [] mirror;//
+    catch(const std::exception& e) {
+        std::cerr << e.what() << '\n';
+    }
+
+    std::cout << std::endl << "   TEST 4: GET ARRAY SIZE " << std:: endl;
+    std::cout << "Array size: "<< arr_str.getsize() << std::endl;
+
+    std::cout << std::endl << "   TEST 5: COPY CONSTRUCTOR " << std:: endl;
+    Array<std::string> arr_str_cpy(arr_str);
+
+    std::cout << "Pre change orig:   " << "    arr_str[0] = '" << arr_str[0] << "';        arr_str[1] = '" << arr_str[1] << "'" << std::endl;
+    std::cout << "Pre change cpy:    " << "arr_str_cpy[0] = '" << arr_str_cpy[0] << "';    arr_str_cpy[1] = '" << arr_str_cpy[1] << "'" << std::endl;
+    
+    arr_str[0] = "Other";
+    arr_str[1] = "Copy";
+
+    std::cout << "Post change orig:  " << "    arr_str[0] = '" << arr_str[0] << "';        arr_str[1] = '" << arr_str[1] << "'" << std::endl;
+    std::cout << "Post change cpy:   " << "arr_str_cpy[0] = '" << arr_str_cpy[0] << "';    arr_str_cpy[1] = '" << arr_str_cpy[1] << "'" << std::endl;
+
+    std::cout << std::endl << "   TEST 6: ASSIGNMENT OPERATOR " << std:: endl;
+    Array<std::string> arr_str_assign(0);
+    arr_str_assign = arr_str;
+
+    std::cout << "Pre change orig:   " << "       arr_str[0] = '" << arr_str[0] << "';        arr_str[1] = '" << arr_str[1] << "'" << std::endl;
+    std::cout << "Pre change cpy:    " << "arr_str_assign[0] = '" << arr_str_assign[0] << "'; arr_str_assign[1] = '" << arr_str_assign[1] << "'" << std::endl;
+    
+    arr_str[0] = "Copy";
+    arr_str[1] = "Test";
+
+    std::cout << "Post change orig:  " << "       arr_str[0] = '" << arr_str[0] << "';         arr_str[1] = '" << arr_str[1] << "'" << std::endl;
+    std::cout << "Post change cpy:   " << "arr_str_assign[0] = '" << arr_str_assign[0] << "'; arr_str_assign[1] = '" << arr_str_assign[1] << "'" << std::endl;
+
+    
     return 0;
 }
