@@ -2,7 +2,6 @@
 # define BASE_HPP
 
 #include <iostream>
-#include <typeinfo>
 #include <cstdlib>
 #include <ctime>
 #include <exception>
@@ -17,4 +16,4 @@ Base * generate(void);
 void identify(Base* p);
 void identify(Base& p);
 
-#endif 
+#endif

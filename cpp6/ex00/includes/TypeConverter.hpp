@@ -5,8 +5,7 @@
 #include <string>
 #include <sstream>
 #include <cctype>
-#include <cmath> 
-#include <limits>
+#include <cmath>
 #include <iomanip>
 
 class TypeConverter {
@@ -16,7 +15,7 @@ class TypeConverter {
         TypeConverter(const TypeConverter & t);
         TypeConverter& operator= (const TypeConverter & t);
         ~TypeConverter();
-    
+
     public:
         static int typecheck (std::string & s);
 
