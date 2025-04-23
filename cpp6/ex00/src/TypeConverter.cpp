@@ -65,7 +65,7 @@ void TypeConverter::displayconversion (char c) {
 
 void TypeConverter::displayconversion (int i) {
 
-    if (std::isprint(static_cast<char>(i)))
+    if (std::isprint(static_cast<char>(i)) && static_cast<char>(i) == i)
         std::cout << "char: '" << static_cast<char>(i) << "'" << std::endl;
     else
         std::cout << "char: Non displayable" << std::endl;
@@ -76,7 +76,7 @@ void TypeConverter::displayconversion (int i) {
 
 void TypeConverter::displayconversion (float f) {
 
-    if (std::isprint(static_cast<char>(f)))
+    if (std::isprint(static_cast<char>(f)) && static_cast<char>(f) == f)
         std::cout << "char: '" << static_cast<char>(f) << "'" << std::endl;
     else
         std::cout << "char: Non displayable" << std::endl;
@@ -87,7 +87,7 @@ void TypeConverter::displayconversion (float f) {
 
 void TypeConverter::displayconversion (double d) {
 
-    if (std::isprint(static_cast<char>(d)))
+    if (std::isprint(static_cast<char>(d)) && static_cast<char>(d) == d)
         std::cout << "char: '" << static_cast<char>(d) << "'" << std::endl;
     else
         std::cout << "char: Non displayable" << std::endl;

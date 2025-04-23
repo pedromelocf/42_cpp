@@ -10,8 +10,8 @@ int main( void ) {
     std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
     std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl << std::endl;
 
-    std::string c = "chaine1";
-    std::string d = "chaine2";
+    std::string c = "test1";
+    std::string d = "test2";
 
     ::swap(c, d);
     std::cout << "c = " << c << ", d = " << d << std::endl;
@@ -35,4 +35,4 @@ int main( void ) {
     std::cout << "max( h, e ) = " << ::max( h, e ) << std::endl;
 
     return 0;
-}   
+}
