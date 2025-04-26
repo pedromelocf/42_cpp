@@ -2,7 +2,7 @@
 # define SERIALIZER_HPP
 
 #include <iostream>
-#include <stdint.h>
+#include <cstdlib>
 #include <cassert>
 
 struct Data;
@@ -21,4 +21,4 @@ class Serializer {
 
 };
 
-#endif 
+#endif

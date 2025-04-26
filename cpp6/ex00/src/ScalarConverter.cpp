@@ -22,43 +22,37 @@ void ScalarConverter::convert (const char * s) {
     switch (type) {
 
         case 0: {
-            char c = TypeConverter::convertchar(literal);
-            TypeConverter::displayconversion(c);
+            TypeConverter::displayconversion(static_cast<char>(TypeConverter::convertchar(literal)));
             break;
         }
-        
+
         case 1:{
-            int i = TypeConverter::convertint(literal);
-            TypeConverter::displayconversion(i);
+            TypeConverter::displayconversion(static_cast<int>(TypeConverter::convertint(literal)));
             break;
         }
-        
+
         case 2:{
-            double d = TypeConverter::convertdouble(literal);
-            TypeConverter::displayconversion(d);
+            TypeConverter::displayconversion(static_cast<double>(TypeConverter::convertdouble(literal)));
             break;
         }
 
         case 3: {
-            float f = TypeConverter::convertfloat(literal);
-            TypeConverter::displayconversion(f);
+            TypeConverter::displayconversion(static_cast<float>(TypeConverter::convertfloat(literal)));
             break;
         }
 
         case 4: {
-            float pf = TypeConverter::convertfloat(literal);
-            TypeConverter::displaypseudo(pf);
+            TypeConverter::displaypseudo(static_cast<float>(TypeConverter::convertfloat(literal)));
             break;
         }
 
         case 5:{
-            double pd = TypeConverter::convertdouble(literal);
-            TypeConverter::displaypseudo(pd);
+            TypeConverter::displaypseudo(static_cast<double>(TypeConverter::convertdouble(literal)));
             break;
         }
 
         default:
             std::cout << "Invalid literal." << std::endl;
             break;
-    }    
+    }
 }
