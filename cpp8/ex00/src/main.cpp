@@ -1,5 +1,9 @@
 #include "../includes/easyfind.hpp"
 
+#include <deque>
+#include <list>
+#include <vector>
+
 int main () {
 
     std::vector<int> vector_int(0);

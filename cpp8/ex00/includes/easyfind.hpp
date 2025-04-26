@@ -4,10 +4,7 @@
 #include <algorithm>
 #include <exception>
 #include <iterator>
-#include <vector>
 #include <iostream>
-#include <deque>
-#include <list>
 
 template <typename T>
 int easyfind(T intcontainer, int tofind)
