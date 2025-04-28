@@ -5,11 +5,11 @@
 
 struct Data {
 
-    std::string name;
-    int age;
+	std::string name;
+	int age;
 
-    Data(const std::string& name, int age)
-    : name(name), age(age) {}
+	Data(const std::string& name, int age)
+	: name(name), age(age) {}
 
 };
 

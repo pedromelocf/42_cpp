@@ -4,21 +4,21 @@ int PhoneBook::index = 0;
 
 void PhoneBook::AddContact () {
 
-    this->contact[index % 8].SetFirstName(GetInputForField(1));
-    this->contact[index % 8].SetLastName(GetInputForField(2));
-    this->contact[index % 8].SetNickName(GetInputForField(3));
-    this->contact[index % 8].SetPhoneNumber(GetInputForField(4));
-    this->contact[index % 8].SetDarkestSecret(GetInputForField(5));
+	this->contact[index % 8].SetFirstName(GetInputForField(1));
+	this->contact[index % 8].SetLastName(GetInputForField(2));
+	this->contact[index % 8].SetNickName(GetInputForField(3));
+	this->contact[index % 8].SetPhoneNumber(GetInputForField(4));
+	this->contact[index % 8].SetDarkestSecret(GetInputForField(5));
 
-    index += 1;
+	index += 1;
 
 }
 
 std::string GetInputForField ( int option ) {
 
-    std::string prompt;
+	std::string prompt;
 
-    switch ( option ) {
+	switch ( option ) {
 		case 1:
 			std::cout << "  Define first name:   " ;
 			break;
@@ -28,7 +28,7 @@ std::string GetInputForField ( int option ) {
 			break;
 		
 		case 3:
-			std::cout << "   Define nickname:    " ;
+			std::cout << "   Define nickname:	" ;
 			break;
 
 		case 4:
@@ -38,7 +38,7 @@ std::string GetInputForField ( int option ) {
 		case 5:
 			std::cout << "Define darkest secret: " ; 
 			break;
-    }
+	}
 
 	while ( std::getline ( std::cin , prompt ) )
 	{
@@ -53,22 +53,22 @@ std::string GetInputForField ( int option ) {
 
 void PhoneBook::ShowPhoneBook () {
 
-    int index = 0;
-    int size = GetPhoneBookSize();
+	int index = 0;
+	int size = GetPhoneBookSize();
 
-	std::cout << "|     INDEX|FIRST NAME| LAST NAME|  NICKNAME|" << std::endl;
+	std::cout << "|	 INDEX|FIRST NAME| LAST NAME|  NICKNAME|" << std::endl;
 
-    while (index < size)
-    {
-        std::cout << "|         " << index + 1 << "|" ;
-        std::cout << RightAlignAndTruncate( this->contact[index].GetFirstName() ) ;
-        std::cout << RightAlignAndTruncate( this->contact[index].GetLastName() ) ;
-        std::cout << RightAlignAndTruncate( this->contact[index].GetNickName() ) ;
-        std::cout << std::endl;
-        index++;
-    }
-    
-    this->SearchContactInterface();
+	while (index < size)
+	{
+		std::cout << "|		 " << index + 1 << "|" ;
+		std::cout << RightAlignAndTruncate( this->contact[index].GetFirstName() ) ;
+		std::cout << RightAlignAndTruncate( this->contact[index].GetLastName() ) ;
+		std::cout << RightAlignAndTruncate( this->contact[index].GetNickName() ) ;
+		std::cout << std::endl;
+		index++;
+	}
+	
+	this->SearchContactInterface();
 
 }
 
@@ -90,37 +90,37 @@ std::string RightAlignAndTruncate (std::string to_format) {
 }
 
 void PhoneBook::SearchContactInterface () {
-    
-    std::string prompt;
+	
+	std::string prompt;
 
-    std::cout << "Prompt the index of the entry to display:" << std::endl;
-    std::getline ( std::cin , prompt );
-    SearchContactByIndex ( prompt );
+	std::cout << "Prompt the index of the entry to display:" << std::endl;
+	std::getline ( std::cin , prompt );
+	SearchContactByIndex ( prompt );
 
 }
 
 void PhoneBook::SearchContactByIndex ( std::string prompt ) {
 
-    int index = atoi( prompt.c_str() );
+	int index = atoi( prompt.c_str() );
 
-    if ( index > 8 || index < 1 || this->contact[index - 1].GetFirstName().empty() )
-        std::cout << "Invalid index" << std::endl;
-    else
-    {
-        std::cout << "First Name:     " << this->contact[index - 1].GetFirstName() << std::endl ;
-        std::cout << "Last Name:      " << this->contact[index - 1].GetLastName() << std::endl ;
-        std::cout << "NickName:       " << this->contact[index - 1].GetNickName() << std::endl ;
-        std::cout << "Phone Number:   " << this->contact[index - 1].GetPhoneNumber() << std::endl ;
-        std::cout << "Darkest Secret: " << this->contact[index - 1].GetDarkestSecret() << std::endl ;
-    }
+	if ( index > 8 || index < 1 || this->contact[index - 1].GetFirstName().empty() )
+		std::cout << "Invalid index" << std::endl;
+	else
+	{
+		std::cout << "First Name:	 " << this->contact[index - 1].GetFirstName() << std::endl ;
+		std::cout << "Last Name:	  " << this->contact[index - 1].GetLastName() << std::endl ;
+		std::cout << "NickName:	   " << this->contact[index - 1].GetNickName() << std::endl ;
+		std::cout << "Phone Number:   " << this->contact[index - 1].GetPhoneNumber() << std::endl ;
+		std::cout << "Darkest Secret: " << this->contact[index - 1].GetDarkestSecret() << std::endl ;
+	}
 }
 
 int PhoneBook::GetPhoneBookSize () {
 
-    int size = 0;
+	int size = 0;
 
-    while ( size < 8 && !this->contact[size].GetFirstName().empty() )
-        size++;
-    return ( size );
+	while ( size < 8 && !this->contact[size].GetFirstName().empty() )
+		size++;
+	return ( size );
 
 }

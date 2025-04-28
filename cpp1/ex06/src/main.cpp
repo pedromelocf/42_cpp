@@ -2,12 +2,12 @@
 
 int main ( int argc, char **argv ) {
 
-    if ( !invalidArgs ( argc ) )
-        return 1;
+	if ( !invalidArgs ( argc ) )
+		return 1;
 
-    Harl harl;
+	Harl harl;
 
-    harl.filter( argv[1] );
+	harl.filter( argv[1] );
 
-    return 0;
+	return 0;
 }

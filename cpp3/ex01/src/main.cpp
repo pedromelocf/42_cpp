@@ -11,11 +11,11 @@ int main (void){
 
 	testConstructorDestructor();
 	testIndividualities();
-    testDamage();
-    testRepaired();
-    testEnergyPoints();
+	testDamage();
+	testRepaired();
+	testEnergyPoints();
 
-    return 0;
+	return 0;
 }
 
 static void testConstructorDestructor() {
@@ -78,7 +78,7 @@ static void testIndividualities() {
 
 static void testDamage () {
 
-    std::cout << std::endl << std::endl << "-----Damage test-----" << std::endl;
+	std::cout << std::endl << std::endl << "-----Damage test-----" << std::endl;
 
 	ScavTrap scav("Penguin");
 	scav.takeDamage(10);
@@ -88,12 +88,12 @@ static void testDamage () {
 	clap.takeDamage(5);
 	std::cout << std::endl;
 
-    std::cout << "-----Damage test end-----" << std::endl;
+	std::cout << "-----Damage test end-----" << std::endl;
 }
 
 static void testRepaired () {
 
-    std::cout << std::endl << std::endl << "-----Repaired test-----" << std::endl;
+	std::cout << std::endl << std::endl << "-----Repaired test-----" << std::endl;
 
 	ScavTrap scav("Janis");
 	scav.beRepaired(10);
@@ -103,12 +103,12 @@ static void testRepaired () {
 	clap.beRepaired(5);
 	std::cout << std::endl;
 
-    std::cout << "-----Repaired test end-----" << std::endl ;
+	std::cout << "-----Repaired test end-----" << std::endl ;
 }
 
 static void testEnergyPoints () {
 
-    std::cout << std::endl << std::endl << "-----Energy Points test-----" << std::endl;
+	std::cout << std::endl << std::endl << "-----Energy Points test-----" << std::endl;
 
 	ScavTrap scav("Homelander");
 	std::cout << scav.getName() << " has " << scav.getEnergyPoints() << " energy points left." << std::endl << std::endl;
@@ -116,5 +116,5 @@ static void testEnergyPoints () {
 	ClapTrap clap("Peacekeeper");
 	std::cout  << clap.getName() << " has " << clap.getEnergyPoints() << " energy points left." << std::endl << std::endl;
 
-    std::cout << "-----Energy Point test end-----" << std::endl;
+	std::cout << "-----Energy Point test end-----" << std::endl;
 }

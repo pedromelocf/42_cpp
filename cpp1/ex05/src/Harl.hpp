@@ -5,18 +5,18 @@
 
 class Harl {
 
-    public :
-        Harl ();
-        ~Harl ();
-        void	complain ( const std::string& level );
+	public :
+		Harl ();
+		~Harl ();
+		void	complain ( const std::string& level );
 		void	(Harl::*ptrToMemberFunc)();
 
-    private:
-        void    debug();
-        void    info ();
-        void    warning ();
-        void    error ();
-        void    invalid ();
+	private:
+		void	debug();
+		void	info ();
+		void	warning ();
+		void	error ();
+		void	invalid ();
 
 };
 

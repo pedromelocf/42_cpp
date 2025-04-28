@@ -100,14 +100,14 @@ void	Account::displayAccountsInfos ( void ) {
 
 void	Account::_displayTimestamp ( void ) {
 
-    time_t      cur_time;
-    struct tm*  time_info;
-    char        buff[16];
+	time_t	  cur_time;
+	struct tm*  time_info;
+	char		buff[16];
 
-    std::time(&cur_time);
-    time_info = std::localtime(&cur_time);
-    std::strftime(buff, sizeof(buff), "%Y%m%d_%H%M%S",time_info);
-    std::cout << "[" << buff << "] ";
+	std::time(&cur_time);
+	time_info = std::localtime(&cur_time);
+	std::strftime(buff, sizeof(buff), "%Y%m%d_%H%M%S",time_info);
+	std::cout << "[" << buff << "] ";
 
 }
 

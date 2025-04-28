@@ -8,19 +8,19 @@ std::string RightAlignAndTruncate (std::string to_format);
 
 class PhoneBook {
 
-    private: 
+	private: 
 
-        Contact contact[8];
-        static int index;
+		Contact contact[8];
+		static int index;
 
-    public:
-    
-        void AddContact ();
-        void ShowPhoneBook ();
-        void SearchContactInterface ();
-        void SearchContactByIndex ( std::string prompt );
-        int GetPhoneBookSize ();
-    
+	public:
+	
+		void AddContact ();
+		void ShowPhoneBook ();
+		void SearchContactInterface ();
+		void SearchContactByIndex ( std::string prompt );
+		int GetPhoneBookSize ();
+	
 };
 
 #endif

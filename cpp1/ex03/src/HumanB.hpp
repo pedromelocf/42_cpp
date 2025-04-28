@@ -5,18 +5,18 @@
 
 class HumanB {
 
-    public:
+	public:
 
-        HumanB( std::string name );
-        ~HumanB();
-        void attack( void );
-        void setWeapon ( Weapon& weapon );
+		HumanB( std::string name );
+		~HumanB();
+		void attack( void );
+		void setWeapon ( Weapon& weapon );
 
-    private:
+	private:
 
-        std::string name;
-        Weapon *type;
-        
+		std::string name;
+		Weapon *type;
+		
 };
 
 #endif

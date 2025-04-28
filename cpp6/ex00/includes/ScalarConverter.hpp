@@ -6,14 +6,14 @@
 
 class ScalarConverter
 {
-    private:
-        ScalarConverter();
-        ScalarConverter(const ScalarConverter & s);
-        ScalarConverter& operator= (const ScalarConverter & s);
-        ~ScalarConverter();
+	private:
+		ScalarConverter();
+		ScalarConverter(const ScalarConverter & s);
+		ScalarConverter& operator= (const ScalarConverter & s);
+		~ScalarConverter();
 
-    public:
-        static void convert (const char * s);
+	public:
+		static void convert (const char * s);
 };
 
 #endif

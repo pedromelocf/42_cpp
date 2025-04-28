@@ -5,17 +5,17 @@
 
 class Zombie {
 
-    public:
+	public:
 
-        Zombie ( void );
-        Zombie ( std::string name );
-        ~Zombie ( void );
-        void announce( void );
-        void setName ( std:: string name);
-    
-    private:
+		Zombie ( void );
+		Zombie ( std::string name );
+		~Zombie ( void );
+		void announce( void );
+		void setName ( std:: string name);
+	
+	private:
 
-        std::string _name;
+		std::string _name;
 
 };
 

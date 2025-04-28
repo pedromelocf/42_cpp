@@ -2,17 +2,29 @@
 
 int main () {
 
-    std::vector<int> vector_int;
+	std::vector<int> vector_int;
 
-    for (long unsigned int i = 0; i <= 99999; i++) {
-        vector_int.push_back(i);
-    }
+	for (long unsigned int i = 0; i <= 99999; i++) {
+		vector_int.push_back(i);
+	}
 
-    Span sp = Span(100000);
-    try {
-        sp.addNumber(vector_int.begin(), vector_int.end());
-    } catch (const std::exception & e) {
-        std::cerr << e.what()  << std::endl;
-    }
+	Span sp = Span(100000);
+	try {
+		sp.addNumber(vector_int.begin(), vector_int.end());
+	} catch (const std::exception & e) {
+		std::cerr << e.what()  << std::endl;
+	}
+
+	try {
+		sp.longestSpan();
+	} catch (const std::exception & e) {
+		std::cerr << e.what() << std::endl;
+	}
+
+	try {
+		sp.shortestSpan();
+	} catch (const std::exception & e) {
+		std::cerr << e.what() << std::endl;
+	}
 
 }

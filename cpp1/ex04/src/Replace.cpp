@@ -4,36 +4,36 @@ Replace::Replace( int argc, char** argv ) : _argc( argc ), _argv( argv ) {}
 
 Replace::~Replace() {}
 
-bool    Replace::validate () {
+bool	Replace::validate () {
 
-    if ( this->invalidArgs() && this->fileExists() )
-        return true;
-    return false;
+	if ( this->invalidArgs() && this->fileExists() )
+		return true;
+	return false;
 
 }
 
-void    Replace::copyContent () {
+void	Replace::copyContent () {
 
 	std::string newFile( this->_argv[1] );
-    newFile.append( ".replace" );
+	newFile.append( ".replace" );
 
-    std::ofstream outfile ( newFile.c_str(), std::ios::trunc );
+	std::ofstream outfile ( newFile.c_str(), std::ios::trunc );
 	if (!outfile.is_open()) {
 		std::cerr << "Failed to open file " << newFile << std::endl;
 		return ;
 	}
 
-    std::ifstream inputFile( this->_argv[1] );
+	std::ifstream inputFile( this->_argv[1] );
 	if (!inputFile.is_open()) {
 		std::cerr << "Failed to open file " << this->_argv[1] << std::endl;
 		return ;
 	}
 
 	std::string s1( this->_argv[2] );
-    std::string s2( this->_argv[3] );
+	std::string s2( this->_argv[3] );
 	std::string line;
 
-    while ( std::getline( inputFile, line )) {
+	while ( std::getline( inputFile, line )) {
 
 		size_t	pos = 0, occ = 0;
 
@@ -44,19 +44,19 @@ void    Replace::copyContent () {
 
 		}
 		outfile << line.substr(occ) << std::endl;
-    }
+	}
 
-    inputFile.close();
-    outfile.close();
+	inputFile.close();
+	outfile.close();
 
 }
 
-bool    Replace::invalidArgs () {
+bool	Replace::invalidArgs () {
 
-    if ( this->_argc != 4 ) {
-        std::cout << "Invalid arguments: expected -> \"FILENAME\" \"S1\" \"S2\"" << std::endl;
-        return false;
-    }
+	if ( this->_argc != 4 ) {
+		std::cout << "Invalid arguments: expected -> \"FILENAME\" \"S1\" \"S2\"" << std::endl;
+		return false;
+	}
 
 	std::string s1( this->_argv[2] );
 	if (s1.empty()){
@@ -64,19 +64,19 @@ bool    Replace::invalidArgs () {
 		return false;
 	}
 
-    return true;
+	return true;
 }
 
-bool    Replace::fileExists() {
+bool	Replace::fileExists() {
 
-    std::ofstream fio( this->_argv[1], std::ios::in );
+	std::ofstream fio( this->_argv[1], std::ios::in );
 
-    if ( !fio.is_open() ) {
-        std::cout << "Invalid FILENAME: expected -> valid file" << std::endl;
-        return false;
-    }
+	if ( !fio.is_open() ) {
+		std::cout << "Invalid FILENAME: expected -> valid file" << std::endl;
+		return false;
+	}
 
-    fio.close();
-    return true;
+	fio.close();
+	return true;
 
 }

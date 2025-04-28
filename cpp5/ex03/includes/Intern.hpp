@@ -7,14 +7,14 @@
 #include "ShrubberyCreationForm.hpp"
 
 class Intern {
-    private:
-        AForm* objectBuilder(const std::string & targetName, int i);
+	private:
+		AForm* objectBuilder(const std::string & targetName, int i);
 
-    public:
-        Intern();
-        Intern(const Intern& i);
-        Intern& operator= (const Intern& i);
-        ~Intern();
-        AForm* makeForm(const std::string & formName, const std::string & targetName);
+	public:
+		Intern();
+		Intern(const Intern& i);
+		Intern& operator= (const Intern& i);
+		~Intern();
+		AForm* makeForm(const std::string & formName, const std::string & targetName);
 };
 #endif

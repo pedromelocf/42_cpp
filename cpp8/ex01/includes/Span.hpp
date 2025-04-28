@@ -9,22 +9,22 @@
 
 class Span {
 
-    private:
-        unsigned int _maxSize;
-        std::vector<int> _storedNumbers;
+	private:
+		unsigned int _maxSize;
+		std::vector<int> _storedNumbers;
 
-    public:
-        Span();
-        Span(unsigned int N);
-        // Span(const Span & other);
-        // Span & operator=(const Span & other);
-        ~Span();
+	public:
+		Span();
+		Span(unsigned int N);
+		// Span(const Span & other);
+		// Span & operator=(const Span & other);
+		~Span();
 
-        void addNumber(std::vector<int>::iterator it_begin, std::vector<int>::iterator it_end);
-        int shortestSpan();
-        int longestSpan();
+		void addNumber(std::vector<int>::iterator it_begin, std::vector<int>::iterator it_end);
+		int shortestSpan();
+		int longestSpan();
 
-        unsigned int get_maxSize();
-        std::vector<int> const get_storedNumbers();
+		unsigned int get_maxSize();
+		std::vector<int> const get_storedNumbers();
 };
 #endif 

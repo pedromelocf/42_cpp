@@ -48,5 +48,5 @@ void Cat::setBrain( int index, const std::string idea ) {
 
 const std::string& Cat::getBrain( int index ) const {
 
-    return _brain->Brain::getBrain( index );
+	return _brain->Brain::getBrain( index );
 }

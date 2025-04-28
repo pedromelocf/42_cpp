@@ -23,13 +23,13 @@ cat > $HEADER_FILE <<EOL
 
 class ${CLASS_NAME} {
 
-    private:
+	private:
 
-    public:
-        ${CLASS_NAME}();
-        ${CLASS_NAME}(const ${CLASS_NAME}& other);
-        ${CLASS_NAME}& operator=(const ${CLASS_NAME}& other);
-        ~${CLASS_NAME}();
+	public:
+		${CLASS_NAME}();
+		${CLASS_NAME}(const ${CLASS_NAME}& other);
+		${CLASS_NAME}& operator=(const ${CLASS_NAME}& other);
+		~${CLASS_NAME}();
 };
 
 #endif 
@@ -39,22 +39,22 @@ cat > $SOURCE_FILE <<EOL
 #include "../${HEADER_FILE}"
 
 ${CLASS_NAME}::${CLASS_NAME}() {
-    // Constructor implementation
+	// Constructor implementation
 }
 
 ${CLASS_NAME}::${CLASS_NAME}(const ${CLASS_NAME}& other) {
-    // Copy constructor implementation
+	// Copy constructor implementation
 }
 
 ${CLASS_NAME}& ${CLASS_NAME}::operator=(const ${CLASS_NAME}& other) {
-    if (this != &other) {
-        // Copy assignment implementation
-    }
-    return *this;
+	if (this != &other) {
+		// Copy assignment implementation
+	}
+	return *this;
 }
 
 ${CLASS_NAME}::~${CLASS_NAME}() {
-    // Destructor implementation
+	// Destructor implementation
 }
 EOL
 

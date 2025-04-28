@@ -22,9 +22,9 @@ int main() {
 
 static void testConstructorDestructor( ) {
 
-    std::cout << "-----*---- TESTING CONSTRUCTORS AND DESTRUCTORS -----*----" << std::endl;
+	std::cout << "-----*---- TESTING CONSTRUCTORS AND DESTRUCTORS -----*----" << std::endl;
 
-    Animal** a = new Animal*[4];
+	Animal** a = new Animal*[4];
 
 	std::cout << " -*- CREATING DOG INSTANCES -*- " << std::endl;
 
@@ -47,7 +47,7 @@ static void testConstructorDestructor( ) {
 		std::cout << std::endl;
 	}
 
-    delete[] a;
+	delete[] a;
 
 }
 
@@ -55,25 +55,25 @@ static void testDog( ) {
 
 	std::cout << "-----*---- TESTING DOG -----*----" << std::endl;
 
-    std::cout << "-*- INITIALIZING DOG JOE OBJECT -*-" << std::endl;
+	std::cout << "-*- INITIALIZING DOG JOE OBJECT -*-" << std::endl;
 
-    Dog *joe = new Dog();
+	Dog *joe = new Dog();
 
 	std::cout << "Joe Type: " << joe->getType() << std::endl;
 	joe->makeSound();
-    joe->setBrain(0, "I love eating chicken bone!");
-    joe->setBrain(1, "All I need is food");
-    joe->setBrain(2, "I hate cats D: ");
+	joe->setBrain(0, "I love eating chicken bone!");
+	joe->setBrain(1, "All I need is food");
+	joe->setBrain(2, "I hate cats D: ");
 
 	std::cout << "Joe's Brain (Index 0): " << joe->getBrain(0) << std::endl;
 	std::cout << "Joe's Brain (Index 1): " << joe->getBrain(1) << std::endl;
 	std::cout << "Joe's Brain (Index 2): " << joe->getBrain(2) << std::endl;
 	std::cout << "Joe's Brain (Index 3): " << joe->getBrain(3) << " (Must be empty)" << std::endl;
 
-    joe->setBrain(0, "I am very fluffy");
+	joe->setBrain(0, "I am very fluffy");
 	std::cout << "Updated Joe's Brain (Index 0): " << joe->getBrain(0) << std::endl;
 
-    std::cout << std::endl;
+	std::cout << std::endl;
 	std::cout << "-*- DELETING DOG JOE OBJECT -*-" << std::endl;
 
 	delete joe;
@@ -83,25 +83,25 @@ static void testCat() {
 
 	std::cout << std::endl << "-----*---- TESTING CAT  -----*----" << std::endl;
 
-    std::cout << "-*- INITIALIZING CAT PRINCESS OBJECT -*-" << std::endl;
+	std::cout << "-*- INITIALIZING CAT PRINCESS OBJECT -*-" << std::endl;
 
-    Cat *princess = new Cat();
+	Cat *princess = new Cat();
 
 	std::cout << "Princess Type: " << princess->getType() << std::endl;
-    princess->makeSound();
-    princess->setBrain(4, "I require snacks immediately, or I shall perish dramatically.");
-    princess->setBrain(5, "I slept 16 hours today. Tomorrow? A new record.");
-    princess->setBrain(6, "Your keyboard is my throne, and I will not be moved.");
+	princess->makeSound();
+	princess->setBrain(4, "I require snacks immediately, or I shall perish dramatically.");
+	princess->setBrain(5, "I slept 16 hours today. Tomorrow? A new record.");
+	princess->setBrain(6, "Your keyboard is my throne, and I will not be moved.");
 
 	std::cout << "Princess's Brain (Index 4): " << princess->getBrain(4) << std::endl;
 	std::cout << "Princess's Brain (Index 5): " << princess->getBrain(5) << std::endl;
 	std::cout << "Princess's Brain (Index 6): " << princess->getBrain(6) << std::endl;
 	std::cout << "Princess's Brain (Index 7): " << princess->getBrain(7) << " (Must be empty)" << std::endl;
 
-    princess->setBrain(4, "I am very fluffy");
+	princess->setBrain(4, "I am very fluffy");
 	std::cout << "Updated Princess's Brain (Index 4): " << princess->getBrain(4) << std::endl;
 
-    std::cout << std::endl;
+	std::cout << std::endl;
 	std::cout << "-*- DELETING CAT PRINCESS OBJECT -*-" << std::endl;
 
 	delete princess;
