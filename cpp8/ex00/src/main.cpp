@@ -90,4 +90,12 @@ int main () {
 		std::cerr << e.what() << std::endl;
 	}
 
+	std::cout << std::endl << "*--------- TEST 7: EMPTY ---------*" << std::endl;
+	std::vector<int> empty_vector(0);
+	try {
+		int value = easyfind(empty_vector, 9);
+		std::cout << "Number found : " << value << std::endl;
+	} catch(const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+	}
 }

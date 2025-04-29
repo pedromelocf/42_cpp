@@ -2,16 +2,17 @@
 
 Span::Span() : _maxSize(0) , _storedNumbers(0) {}
 
-Span::Span(unsigned int N) : _maxSize(N), _storedNumbers(N) {}
+Span::Span(unsigned int N) : _maxSize(N), _storedNumbers(0) {}
 
-// Span::Span(const Span& other) {}
+Span::Span(const Span& other) : _maxSize(other._maxSize), _storedNumbers(other._storedNumbers) {}
 
-// Span& Span::operator=(const Span& other) {
-//	 if (this != &other) {
-//		 // Copy assignment implementation
-//	 }
-//	 return *this;
-// }
+Span & Span::operator=(const Span & other) {
+	if (this != & other) {
+		_maxSize = other._maxSize;
+		_storedNumbers = other._storedNumbers;
+	}
+	return *this;
+}
 
 Span::~Span() {}
 
@@ -24,12 +25,29 @@ void Span::addNumber(std::vector<int>::iterator it_begin, std::vector<int>::iter
 	}
 }
 
+void Span::addNumber(int number) {
+	if (this->_storedNumbers.size() >= this->_maxSize)
+		throw std::out_of_range("Attempt to add element failed: Maxsize reached");
+	_storedNumbers.push_back(number);
+}
+
 int Span::shortestSpan() {
 	
 	if (get_maxSize() <= 1)
-		throw std::out_of_range("Invalid span size.");
+		throw std::out_of_range("Invalid number of elements.");
 
-	return 0;
+	std::vector<int> sorted = _storedNumbers;
+	std::sort(sorted.begin(), sorted.end());
+	std::vector<int>::iterator it = sorted.begin();
+	std::vector<int>::iterator ite = sorted.end();
+
+	int shortestSpan = INT_MAX;
+	for (; it != ite - 1 ; ++it) {
+		if (*(it + 1) - *it < shortestSpan)
+			shortestSpan = *(it + 1) - *it;
+	}
+
+	return shortestSpan;
 }
 
 int Span::longestSpan() {
@@ -37,7 +55,10 @@ int Span::longestSpan() {
 	if (get_maxSize() <= 1)
 		throw std::out_of_range("Invalid number of elements.");
 
-	return 0;
+	std::vector<int> sorted = _storedNumbers;
+	std::sort(sorted.begin(), sorted.end());
+
+	return *(sorted.end() - 1) - *sorted.begin();
 }
 
 std::vector<int> const Span::get_storedNumbers() { return _storedNumbers; }

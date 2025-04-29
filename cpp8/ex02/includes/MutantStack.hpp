@@ -10,9 +10,13 @@ class MutantStack: public std::stack<T> {
 
 	public:
 		MutantStack () {};
-		MutantStack (const MutantStack & copy) : std::stack<T>(copy) {};
-		
-		// MutantStack & operator= (const MutantStack & copy) { };
+		MutantStack (const MutantStack & copy) : std::stack<T>(copy) {};	
+
+		MutantStack & operator= (const MutantStack & copy) {
+			if (this != & copy)
+				std::stack<T>::operator=(copy);
+			return *this;
+		};
 		~MutantStack () {};
 		typedef typename std::deque<T>::iterator iterator;
 
