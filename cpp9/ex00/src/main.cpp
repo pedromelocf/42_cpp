@@ -19,7 +19,10 @@ int main (int argc, char **argv) {
         return 3;    
     }
 
+    BitcoinExchange obj = BitcoinExchange(hist_prices_file);
+
     input_file.close();
     hist_prices_file.close();
+    
     return 0;
 }
