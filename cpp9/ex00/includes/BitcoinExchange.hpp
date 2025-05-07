@@ -6,25 +6,31 @@
 #include <string>
 #include <map>
 #include <algorithm>
+#include <cstdlib>
+#include <cctype>
+#include <sstream>
 #include <iterator>
 
 class BitcoinExchange {
 
     private:
-        std::map<std::string, float>    _hist_prices;
-
-        void initialize_prices(std::ifstream & hist_prices);
+        std::map<std::string, double>  _hist_prices;
 
     public:
         BitcoinExchange();
-        BitcoinExchange(std::ifstream & hist_prices);
-        // BitcoinExchange(const BitcoinExchange& other);
-        // BitcoinExchange& operator=(const BitcoinExchange& other);
+        BitcoinExchange(std::string & data);
+        BitcoinExchange(const BitcoinExchange& other);
+        BitcoinExchange& operator=(const BitcoinExchange& other);
         ~BitcoinExchange();
 
-        int  get_daily_price(std::string & date);
-        void get_output(std::string & date, int amount);
-        void display_results(std::ifstream & input_file);
+        void initialize_prices(std::ifstream & hist_prices);
+        static bool checkDate(std::string const & date);
+        static double checkExchangeRate(std::string const & exchange_rate);
+        double getDailyPrice(std::string const & date) const;
+ 
+        void displayResults(std::ifstream & input_file);
+        void getOutput(std::string const & date, std::string const &  amount) ;
+        static int checkInputFileLine(std::string const & date, std::string const & amount);
 };
 
 #endif 

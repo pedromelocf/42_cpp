@@ -3,26 +3,28 @@
 int main (int argc, char **argv) {
     
     if (argc != 2) {
-        std::cout << "Error: invalid number of arguments." << std::endl;
+        std::cerr << "Error: invalid number of arguments." << std::endl;
         return 1;    
     }
 
     std::ifstream input_file(argv[1], std::ios::in);
     if (!input_file.is_open()) {
-        std::cout << "Error: could not open input file." << std::endl;
+        std::cerr << "Error: could not open input file." << std::endl;
         return 2;    
     }
 
-    std::ifstream hist_prices_file("src/data/data.csv", std::ios::in);
+    std::string data = "src/data/data.csv";
+    std::ifstream hist_prices_file(data.c_str(), std::ios::in);
     if (!hist_prices_file.is_open()) {
-        std::cout << "Error: could not open data file." << std::endl;
+        std::cerr<< "Error: could not open data file." << std::endl;
         return 3;    
     }
+    hist_prices_file.close();
 
-    BitcoinExchange obj = BitcoinExchange(hist_prices_file);
+    BitcoinExchange bitcoin_exchange(data);
+    BitcoinExchange::displayResults(input_file);
 
     input_file.close();
-    hist_prices_file.close();
     
     return 0;
 }
