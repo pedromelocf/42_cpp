@@ -19,12 +19,12 @@ int main (int argc, char **argv) {
         std::cerr<< "Error: could not open data file." << std::endl;
         return 3;    
     }
-    hist_prices_file.close();
 
     BitcoinExchange bitcoin_exchange(data);
-    BitcoinExchange::displayResults(input_file);
+    bitcoin_exchange.displayResults(input_file);
 
     input_file.close();
+    hist_prices_file.close();
     
     return 0;
 }

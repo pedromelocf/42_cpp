@@ -26,11 +26,13 @@ class BitcoinExchange {
         void initialize_prices(std::ifstream & hist_prices);
         static bool checkDate(std::string const & date);
         static double checkExchangeRate(std::string const & exchange_rate);
-        double getDailyPrice(std::string const & date) const;
+        double getClosestDailyPrice(std::string const & date) const;
  
         void displayResults(std::ifstream & input_file);
         void getOutput(std::string const & date, std::string const &  amount) ;
         static int checkInputFileLine(std::string const & date, std::string const & amount);
 };
+
+bool checkDigits(std::string const & value);
 
 #endif 
