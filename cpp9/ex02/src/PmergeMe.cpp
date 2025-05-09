@@ -32,7 +32,7 @@ void PmergeMe::fordJohnsonSortVector(int pair_size) {
         int chunks = _vector.size() / pair_size;
         for (int i = 0; chunks > 0 ; i += pair_size, --chunks) {
 
-            int k = round(i + sqrt(pair_size) - 1);
+            int k = i + pair_size / 2 - 1;
             int l = i + pair_size - 1;
             if (_vector.at(k) > _vector.at(l)) {
 
@@ -51,7 +51,7 @@ void PmergeMe::fordJohnsonSortVector(int pair_size) {
     }
 
     // start Jacobsthal numbers;
-    
+
     while (pair_size != 2) {
 
 
