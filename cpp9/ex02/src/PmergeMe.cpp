@@ -30,7 +30,6 @@ void PmergeMe::fordJohnsonSortVector(int pair_size) {
     while (( _vector.size() / 2) > pair_size ) {
 
         int chunks = _vector.size() / pair_size;
-
         for (int i = 0; chunks > 0 ; i += pair_size, --chunks) {
 
             int k = round(i + sqrt(pair_size) - 1);
@@ -38,8 +37,8 @@ void PmergeMe::fordJohnsonSortVector(int pair_size) {
             if (_vector.at(k) > _vector.at(l)) {
 
                 std::vector<int> temp;
-                if (chunks == 1 && _vector.size() / pair_size != 0) {
-                    
+                if (chunks == 1 && _vector.size() % pair_size != 0 ) {
+
                     temp.insert(temp.begin(), _vector.begin() + k, _vector.end());
                     _vector.erase(_vector.begin() + k, _vector.end());
                 }
@@ -50,6 +49,14 @@ void PmergeMe::fordJohnsonSortVector(int pair_size) {
         }
         fordJohnsonSortVector(pair_size * 2);
     }
+
+    // start Jacobsthal numbers;
+    
+    while (pair_size != 2) {
+
+
+    }
+
 }
 
 void PmergeMe::fordJohnsonSortDeque() {
