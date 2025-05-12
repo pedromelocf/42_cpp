@@ -58,11 +58,20 @@ void PmergeMe::fordJohnsonSortVector(int pair_size) {
 		}
 		_vector.clear();
 		jacobsthal_numbers = generateJacobsthalIndices(pend.size());
-		int curr_jacobsthal = jacobsthal_numbers[0];
-		for (;pend.size() != 0; ) {
-			while (numbers_to_insert > 0 ) {
-				numbers_to_insert--;
+		int prev_jacobsthal = jacobsthal_numbers[0];
+		for (int p = 1;; p++) {
+
+			int curr_jacobsthal = jacobsthal_numbers[p];
+			int jacobsthal_dif = curr_jacobsthal - prev_jacobsthal;
+			if (jacobsthal_diff > static_cast<int>(pend.size()))
+				break;
+			int insertion_times = jacobsthal_diff;
+			while(insertion_times > 0) {
+				insertion_times--;
 			}
+			prev_jacobsthal = curr_jacobsthal;
+		}
+		while (pend.size() > 0 ) {
 			//insert from end to begin of pend to main.
 		}
 		//copy from temp to main;
