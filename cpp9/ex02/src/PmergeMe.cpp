@@ -1,72 +1,93 @@
 #include "includes/PmergeMe.hpp"
 
-PmergeMe::PmergeMe() {
-    // Constructor implementation
-}
+PmergeMe::PmergeMe() {}
 
 PmergeMe::PmergeMe(const PmergeMe& other) {
-    // Copy constructor implementation
+	_vector = other._vector;
+	_deque = other._deque;
 }
 
 PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
-    if (this != &other) {
-        // Copy assignment implementation
-    }
-    return *this;
+	if (this != &other) {
+		_vector = other._vector;
+		_deque = other._deque;
+	}
+	return *this;
 }
 
-PmergeMe::~PmergeMe() {
-    // Destructor implementation
-}
-
-void PmergeMe::fordJohnsonSort() {
-
-    fordJohnsonSortVector(2);
-    // fordJohnsonSortDeque();
-}
+PmergeMe::~PmergeMe() {}
 
 void PmergeMe::fordJohnsonSortVector(int pair_size) {
 
-    while (( _vector.size() / 2) > pair_size ) {
+	while (( _vector.size() / 2) > pair_size ) {
 
-        int chunks = _vector.size() / pair_size;
-        for (int i = 0; chunks > 0 ; i += pair_size, --chunks) {
+		int chunks = _vector.size() / pair_size;
+		for (int i = 0; chunks > 0 ; i += pair_size, --chunks) {
 
-            int k = i + pair_size / 2 - 1;
-            int l = i + pair_size - 1;
-            if (_vector.at(k) > _vector.at(l)) {
+			int k = i + pair_size / 2 - 1;
+			int l = i + pair_size - 1;
+			if (_vector.at(k) > _vector.at(l)) {
 
-                std::vector<int> temp;
-                if (chunks == 1 && _vector.size() % pair_size != 0 ) {
+				std::vector<int> temp;
+				if (chunks == 1 && _vector.size() % pair_size != 0 ) {
 
-                    temp.insert(temp.begin(), _vector.begin() + k, _vector.end());
-                    _vector.erase(_vector.begin() + k, _vector.end());
-                }
-                std::swap_ranges(_vector.begin(), _vector.begin() + k, _vector.begin() + l);
-                _vector.insert(_vector.begin() + l, temp.begin(), temp.end());
-                temp.clear();
-            }
-        }
-        fordJohnsonSortVector(pair_size * 2);
-    }
+					temp.insert(temp.end(), _vector.begin() + k + 1 , _vector.end());
+					_vector.erase(_vector.begin() + k + 1, _vector.end());
+				}
+				std::swap_ranges(_vector.begin(), _vector.begin() + k, _vector.begin() + l);
+				_vector.insert(_vector.end() - 1, temp.begin(), temp.end());
+				temp.clear();
+			}
+		}
+		fordJohnsonSortVector(pair_size * 2);
+	}
 
-    // start Jacobsthal numbers;
+	int chunks = _vector.size() / pair_size;
+	for (int i = 0; chunks > 0 ; i += pair_size, --chunks) {
 
-    while (pair_size != 2) {
+		std::vector<int> temp, main, pend, jacobsthal_numbers;
+		int vector_size = _vector.size();
+		for (int m = 0 ; vector_size > m; ++m ) {
 
+			if (chunks == 1 && _vector.size() % pair_size != 0 )
+				temp.insert(temp.end(), _vector.begin() + m, _vector.end());
+			else if (m == 0 || m % 2 != 1)
+				main.insert(main.end(), _vector.begin() + m, _vector.begin() + m + pair_size);
+			else
+				pend.insert(pend.end(), _vector.begin() + m, _vector.begin() + m + pair_size );
+		}
+		_vector.clear();
+		jacobsthal_numbers = generateJacobsthalIndices(pend.size());
+		int curr_jacobsthal = jacobsthal_numbers[0];
+		for (;pend.size() != 0; ) {
+			while (numbers_to_insert > 0 ) {
+				numbers_to_insert--;
+			}
+			//insert from end to begin of pend to main.
+		}
+		//copy from temp to main;
+		//copy from main to _vector;
+		// main.clear(); temp.clear();
+	}
+}
 
-    }
+void PmergeMe::fordJohnsonSortDeque(int pair_size) {
+}
+
+bool PmergeMe::checkSequence() {
 
 }
 
-void PmergeMe::fordJohnsonSortDeque() {
+std::vector<int> generateJacobsthalIndices(size_t size) {
 
-    mergeSortDeque(2);
-    insertionSortDeque();
+	std::vector<int> jacobsthal = {1};
+	int j1 = 1, j2 = 0;
+	while (jacobsthal.back() < static_cast<int>(size)) {
+
+		int next = j1 + 2 * j2;
+		jacobsthal.push_back(next);
+		j2 = j1;
+		j1 = next;
+	}
+	return jacobsthal;
 }
-
-void PmergeMe::mergeSortDeque(int pair_size) {}
-
-void PmergeMe::insertionSortDeque() {}
-
-bool PmergeMe::checkSequence() {}

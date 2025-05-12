@@ -4,29 +4,25 @@
 #include <iostream>
 #include <vector>
 #include <deque>
-#include <cmath>
 
 class PmergeMe {
 
-    private:
-        std::vector<int> _vector;
-        std::deque<int> _deque;
+	private:
 
-        void    fordJohnsonSort();
+		std::vector<int> _vector;
+		std::deque<int> _deque;
 
-        void    fordJohnsonSortVector(int pair_size);
+	public:
+		PmergeMe();
+		PmergeMe(const PmergeMe& other);
+		PmergeMe& operator=(const PmergeMe& other);
+		~PmergeMe();
 
-        void    fordJohnsonSortDeque();
-        void    mergeSortDeque(int pair_size);
-        void    insertionSortDeque();
-
-    public:
-        PmergeMe();
-        PmergeMe(const PmergeMe& other);
-        PmergeMe& operator=(const PmergeMe& other);
-        ~PmergeMe();
-
-        static bool checkSequence();
+		void	fordJohnsonSortVector(int pair_size);
+		void	fordJohnsonSortDeque(int pair_size);
+		static bool checkSequence();
 };
 
-#endif 
+std::vector<int> generateJacobsthalIndices(size_t limit);
+
+#endif
