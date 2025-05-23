@@ -11,6 +11,7 @@ class PmergeMe {
 	private:
 		std::vector<int> _vector;
 		std::deque<int> _deque;
+		long unsigned int _pair_size;
 
 	public:
 		PmergeMe();
@@ -19,9 +20,11 @@ class PmergeMe {
 		PmergeMe& operator=(const PmergeMe& other);
 		~PmergeMe();
 
-		void	fordJohnsonSortVector(long unsigned int pair_size);
+		void	fordJohnsonSortVector();
 		// void	fordJohnsonSortDeque(int pair_size);
 		// static bool checkSequence();
+		void	mergeVector();
+		void	insertionVector();
 };
 
 std::vector<int> generateJacobsthalIndices(size_t limit);
