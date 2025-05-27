@@ -5,6 +5,7 @@
 #include <vector>
 #include <deque>
 #include <algorithm>
+#include <cmath>
 
 class PmergeMe {
 
@@ -27,6 +28,7 @@ class PmergeMe {
 		void	insertionVector();
 };
 
-std::vector<int> generateJacobsthalIndices(size_t limit);
+long jacobsthal_number(long n);
+size_t find_chunk_insert_pos(const std::vector<int> main, const std::vector<int> chunk, size_t chunk_size);
 
 #endif

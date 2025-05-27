@@ -52,7 +52,7 @@ void PmergeMe::insertionVector() {
 	while (true) {
 
 		size_t i = 0;
-		std::vector<int> temp, main, pend, jacobsthal_numbers;
+		std::vector<int> temp, main, pend;
 
 		for (;i + _pair_size <= _vector.size(); i += _pair_size) {
 
@@ -64,55 +64,66 @@ void PmergeMe::insertionVector() {
 			else 
 				pend.insert(pend.end(), chunk.begin(), chunk.end());
 		}
-
 		if (_vector.size() % _pair_size != 0) {
 			size_t leftover = _vector.size() - i;
 			temp.insert(temp.end(), _vector.end() - leftover, _vector.end());
 		}
 
-			// _vector.clear();
-			// jacobsthal_numbers = generateJacobsthalIndices(pend.size());
-			// int prev_jacobsthal = jacobsthal_numbers[0];
-			// for (int p = 1 ; p < jacobsthal_numbers.size(); p++) {
+		int prev_jacobsthal = jacobsthal_number(1);
+		int inserted_numbers = 0;
+		int pend_size = static_cast<int>(pend.size() / _pair_size);
+		for (size_t p = 2, k = 0;; p++, k += _pair_size) {
 
-			// 	int curr_jacobsthal = jacobsthal_numbers[p];
-			// 	int jacobsthal_dif = curr_jacobsthal - prev_jacobsthal;
-			// 	if (jacobsthal_dif > static_cast<int>(pend.size()))
-			// 		break;
-			// 	int insertion_times = jacobsthal_dif;
-			// 	while(insertion_times > 0) {
-			// 		insertion_times--;
-			// 	}
-			// 	prev_jacobsthal = curr_jacobsthal;
-			// }
-			// while (pend.size() > 0 ) {
-
-			// 	size_t value_to_insert = pend.back();
-			// 	pend.pop_back();
-			// 	main.insert(std::lower_bound(main.begin(), main.end(), value_to_insert), value_to_insert);
-			// }
-			// main.insert(main.end(), temp.begin(), temp.end());
-			// _vector = main;
-			if (_pair_size == 1)
+			int curr_jacobsthal = jacobsthal_number(p);
+			int jacobsthal_dif = curr_jacobsthal - prev_jacobsthal;
+			if (jacobsthal_dif > pend_size)
 				break;
-			_pair_size /= 2;
+			int insertion_times = jacobsthal_dif;
+			while(insertion_times) {
+
+				std::vector<int> chunk(pend.begin() + k + ((insertion_times - 1) * _pair_size), pend.begin() + k + _pair_size + ((insertion_times - 1) * _pair_size ));
+				int pend_value_to_find = chunk.back();
+				std::vector<int>::iterator chunk_main_last_value, insert_chunk_pos = main.begin();
+				for(long unsigned int j = 0, i = 0; i < main.size() / _pair_size; j += _pair_size, i++) {
+					chunk_main_last_value = main.begin() + j + _pair_size - 1;
+					if (pend_value_to_find > *chunk_main_last_value) 
+						insert_chunk_pos = chunk_main_last_value + 1;
+				}
+				main.insert(insert_chunk_pos, chunk.begin(), chunk.end());
+				insertion_times--;
+			}
+			prev_jacobsthal = curr_jacobsthal;
+			inserted_numbers += jacobsthal_dif;
+			pend_size -= jacobsthal_dif;
+		}
+
+		for (ssize_t i = pend_size - 1; i >= 0; i--) {
+			std::vector<int> chunk(pend.end() - _pair_size * i, pend.end() - (_pair_size * i) + _pair_size);
+			int pend_value_to_find = chunk.back();
+			std::vector<int>::iterator chunk_main_last_value, insert_chunk_pos = main.begin();
+			for(long unsigned int j = 0, i = 0; i < main.size() / _pair_size; j += _pair_size, i++) {
+				chunk_main_last_value = main.begin() + j + _pair_size - 1;
+				if (pend_value_to_find > *chunk_main_last_value) 
+					insert_chunk_pos = chunk_main_last_value + 1;
+			}
+			main.insert(insert_chunk_pos, chunk.begin(), chunk.end());
+		}
+		pend.clear();
+		main.insert(main.end(), temp.begin(), temp.end());
+		_vector = main;
+		if (_pair_size == 1)
+			break;
+		_pair_size /= 2;
 	}
+
+	for (std::vector<int>::iterator be = _vector.begin(); be != _vector.end(); ++be) {
+		std::cout << *be << " " ;
+	}
+	
 }
 
 // void PmergeMe::fordJohnsonSortDeque(int pair_size) {}
 
 // bool PmergeMe::checkSequence() {}
 
-std::vector<int> generateJacobsthalIndices(size_t size) {
-
-	std::vector<int> jacobsthal(1,1);
-	int j1 = 1, j2 = 0;
-	while (jacobsthal.back() < static_cast<int>(size)) {
-
-		int next = j1 + 2 * j2;
-		jacobsthal.push_back(next);
-		j2 = j1;
-		j1 = next;
-	}
-	return jacobsthal;
-}
+long jacobsthal_number(long n) { return round((pow(2, n + 1) + pow(-1, n)) / 3); }
