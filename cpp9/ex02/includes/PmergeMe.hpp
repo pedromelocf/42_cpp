@@ -17,13 +17,12 @@ class PmergeMe {
 	public:
 		PmergeMe();
 		PmergeMe(std::vector<int> to_sort);
+		PmergeMe(std::deque<int> to_sort);
 		PmergeMe(const PmergeMe& other);
 		PmergeMe& operator=(const PmergeMe& other);
 		~PmergeMe();
 
 		void	fordJohnsonSortVector();
-		// void	fordJohnsonSortDeque(int pair_size);
-		// static bool checkSequence();
 		void	mergeVector();
 		void	insertionVector();
 };

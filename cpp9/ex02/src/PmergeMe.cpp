@@ -7,6 +7,11 @@ PmergeMe::PmergeMe(std::vector<int> to_sort) {
 	_pair_size = 2;
 }
 
+PmergeMe::PmergeMe(std::deque<int> to_sort) {
+	_deque = to_sort;
+	_pair_size = 2;
+}
+
 PmergeMe::PmergeMe(const PmergeMe& other) {
 	_vector = other._vector;
 	_deque = other._deque;
