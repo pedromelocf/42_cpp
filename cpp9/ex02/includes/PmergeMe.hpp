@@ -29,6 +29,5 @@ class PmergeMe {
 };
 
 long jacobsthal_number(long n);
-size_t find_chunk_insert_pos(const std::vector<int> main, const std::vector<int> chunk, size_t chunk_size);
 
 #endif

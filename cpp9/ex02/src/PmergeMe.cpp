@@ -57,13 +57,12 @@ void PmergeMe::insertionVector() {
 		for (;i + _pair_size <= _vector.size(); i += _pair_size) {
 
 			std::vector<int> chunk(_vector.begin() + i, _vector.begin() + i + _pair_size);
-			if (i == 0) 
-				main.insert(main.end(), chunk.begin(), chunk.end());
-			else if (((i / _pair_size) % 2) == 1) 
+			if (i == 0 || ((i / _pair_size) % 2) == 1)
 				main.insert(main.end(), chunk.begin(), chunk.end());
 			else 
 				pend.insert(pend.end(), chunk.begin(), chunk.end());
 		}
+
 		if (_vector.size() % _pair_size != 0) {
 			size_t leftover = _vector.size() - i;
 			temp.insert(temp.end(), _vector.end() - leftover, _vector.end());
@@ -72,7 +71,7 @@ void PmergeMe::insertionVector() {
 		int prev_jacobsthal = jacobsthal_number(1);
 		int inserted_numbers = 0;
 		int pend_size = static_cast<int>(pend.size() / _pair_size);
-		for (size_t p = 2, k = 0;; p++, k += _pair_size) {
+		for (size_t p = 2;; p++) {
 
 			int curr_jacobsthal = jacobsthal_number(p);
 			int jacobsthal_dif = curr_jacobsthal - prev_jacobsthal;
@@ -80,8 +79,10 @@ void PmergeMe::insertionVector() {
 				break;
 			int insertion_times = jacobsthal_dif;
 			while(insertion_times) {
-
-				std::vector<int> chunk(pend.begin() + k + ((insertion_times - 1) * _pair_size), pend.begin() + k + _pair_size + ((insertion_times - 1) * _pair_size ));
+				
+				std::vector<int>::iterator chunk_begin = pend.begin() + ((insertion_times - 1) * _pair_size);
+				std::vector<int>::iterator chunk_end = chunk_begin + _pair_size;
+				std::vector<int> chunk(chunk_begin, chunk_end);
 				int pend_value_to_find = chunk.back();
 				std::vector<int>::iterator chunk_main_last_value, insert_chunk_pos = main.begin();
 				for(long unsigned int j = 0, i = 0; i < main.size() / _pair_size; j += _pair_size, i++) {
@@ -89,6 +90,7 @@ void PmergeMe::insertionVector() {
 					if (pend_value_to_find > *chunk_main_last_value) 
 						insert_chunk_pos = chunk_main_last_value + 1;
 				}
+				pend.erase(chunk_begin, chunk_end);
 				main.insert(insert_chunk_pos, chunk.begin(), chunk.end());
 				insertion_times--;
 			}
@@ -115,11 +117,6 @@ void PmergeMe::insertionVector() {
 			break;
 		_pair_size /= 2;
 	}
-
-	for (std::vector<int>::iterator be = _vector.begin(); be != _vector.end(); ++be) {
-		std::cout << *be << " " ;
-	}
-	
 }
 
 // void PmergeMe::fordJohnsonSortDeque(int pair_size) {}
