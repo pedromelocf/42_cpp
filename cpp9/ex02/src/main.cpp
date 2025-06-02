@@ -1,12 +1,20 @@
 #include "../includes/PmergeMe.hpp"
 
-int main () {
+int main (int argc, char **argv) {
 
-    int arr[] = {11, 2, 17, 0, 16, 8, 6, 15, 10, 3, 21, 1, 18, 9, 14, 19, 12, 5, 4, 20, 13,7};
-    std::vector<int> myVector(arr, arr + sizeof(arr) / sizeof(arr[0]));
+   if (argc < 2) {
+      std::cerr << "Usage: ./PmergeMe [positive integers]" << std::endl;
+      return (1);
+   }   
 
-    PmergeMe pmerge(myVector);
-    pmerge.fordJohnsonSortVector();
+   try {
+      PmergeMe pmerge;
+      pmerge.processArgs(argv);
+      pmerge.displayElapsedTime();
+   } catch (const std::exception& e) {
+      std::cerr << e.what() << std::endl;
+      return (2);
+   }
 
-    return 0;
+   return 0;
 }
