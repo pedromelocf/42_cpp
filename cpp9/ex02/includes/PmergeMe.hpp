@@ -7,6 +7,7 @@
 #include <deque>
 #include <set>
 #include <cmath>
+#include <algorithm>
 #include <cstring>
 #include <cstdlib>
 #include <stdexcept>
@@ -19,20 +20,14 @@ class PmergeMe {
 	private:
 		std::vector<int>	_vector;
 		std::deque<int> 	_deque;
-		long unsigned int 	_pairSize;
         double				_vectorTime;
         double				_dequeTime;
 		
 		bool	validateInput(const std::string& input);
 		void	parseArgs(char **argv);
 
-		void	fordJohnsonSortVector();
-		void	mergeVector();
-		void	insertionVector();
-
-		void	fordJohnsonSortDeque();
-		void	mergeDeque();
-		void	insertionDeque();
+		void	fordJohnsonSortVector(std::vector<int>& arr);
+		void	fordJohnsonSortDeque(std::deque<int>& arr);
 
 	public:
 		PmergeMe();
@@ -43,7 +38,5 @@ class PmergeMe {
 		void 	displayElapsedTime();
 
 };
-
-long jacobsthal_number(long n);
 
 #endif
