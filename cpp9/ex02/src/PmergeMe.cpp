@@ -123,10 +123,10 @@ void PmergeMe::fordJohnsonSortVector(std::vector<int>& arr) {
             pairs.push_back(std::make_pair(arr[i + 1], arr[i]));
     }
 
-	bool hasOdd = (arr.size() % 2 != 0);
-    int oddElement = 0;
-    if(hasOdd) {
-    	oddElement = arr[arr.size() - 1];
+	bool hasLeft = (arr.size() % 2 != 0);
+    int leftElements = 0;
+    if(hasLeft) {
+    	leftElements = arr[arr.size() - 1];
 	}
 
 	std::vector<int> largerElements;
@@ -171,8 +171,8 @@ void PmergeMe::fordJohnsonSortVector(std::vector<int>& arr) {
         result.insert(largerIt, largerElement);
     }
 
-	if (hasOdd) 
-        result.insert(std::lower_bound(result.begin(), result.end(), oddElement), oddElement);
+	if (hasLeft) 
+        result.insert(std::lower_bound(result.begin(), result.end(), leftElements), leftElements);
 
     arr = result;
 }
@@ -191,10 +191,10 @@ void PmergeMe::fordJohnsonSortDeque(std::deque<int>& arr) {
             pairs.push_back(std::make_pair(arr[i + 1], arr[i]));
     }
 
-	bool hasOdd = (arr.size() % 2 != 0);
-    int oddElement = 0;
-    if (hasOdd) {
-    	oddElement = arr[arr.size() - 1];
+	bool hasLeft = (arr.size() % 2 != 0);
+    int leftElements = 0;
+    if (hasLeft) {
+    	leftElements = arr[arr.size() - 1];
 	}
 
 	std::deque<int> largerElements;
@@ -239,8 +239,8 @@ void PmergeMe::fordJohnsonSortDeque(std::deque<int>& arr) {
         result.insert(largerIt, largerElement);
     }
 
-	if (hasOdd) 
-        result.insert(std::lower_bound(result.begin(), result.end(), oddElement), oddElement);
+	if (hasLeft) 
+        result.insert(std::lower_bound(result.begin(), result.end(), leftElements), leftElements);
 
     arr = result;
 }
