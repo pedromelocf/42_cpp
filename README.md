@@ -204,7 +204,31 @@ This repository contains solutions for the C++ modules (cpp00 to cpp09) of the 4
 
 **Topics:** Algorithms, containers, performance, complexity
 
-### ex00 – PmergeMe
+### ex00 – BitcoinExchange
+
+* **Description:** Implement a bitcoin exchange using `std::map`.
+* **How to use:**
+
+  ```bash
+  ./btc input.txt
+  ```
+* **Expected result:** Price for each value for date specified in input.txt file.
+
+---
+
+### ex01 – ReversePolishNotation
+
+* **Description:** Implement reverse polish notation using both `std::stack`.
+* **How to use:**
+
+  ```bash
+  ./RPN "8 9 * 9 - 9 - 9 - 4 - 1 +"
+  ```
+* **Expected result:** Correct output using the RPN.
+
+---
+
+### ex02 – PmergeMe
 
 * **Description:** Implement Ford-Johnson sorting algorithm using both `std::vector` and `std::deque`.
 * **How to use:**
@@ -219,7 +243,7 @@ This repository contains solutions for the C++ modules (cpp00 to cpp09) of the 4
 ## Compilation & Execution
 
 ```bash
-cd cppXX       # Replace XX with the module number
+cd cppXX/exXX     # Replace XX with the module number
 make           # Compile the appropriate exercise
-./exNN         # Run the corresponding executable
+./executable         # Run the corresponding executable
 ```
