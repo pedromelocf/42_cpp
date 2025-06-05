@@ -38,21 +38,26 @@ void RPN::processExpression(std::string const & expression) {
 
     for (; it != ite; ++it) {
         int p1 = 0, p2 = 0;
-        if (std::isdigit(*it)) 
+        if (std::isdigit(*it))
             stack.push(std::atoi(&(*it)));
 
         else if ((*it) == '+' || (*it) == '-' || (*it) == '/' || (*it) == '*') {
-            p1 = stack.top(); stack.pop();
             p2 = stack.top(); stack.pop();
+            p1 = stack.top(); stack.pop();
 
-            if ((*it) == '+') 
-                stack.push(p2 + p1);
+            if ((*it) == '+')
+                stack.push(p1 + p2);
             else if ((*it) == '-')
-                stack.push(p2 - p1);
-            else if ((*it) == '/' && (*it) != 0)
-                stack.push(p2 / p1);
+                stack.push(p1 - p2);
+            else if ((*it) == '/') {
+                if (p2 != 0) {
+                    std::cerr << "Not possible to divide by 0" << std::endl;
+                    return;
+                }
+                stack.push(p1 / p2);
+            }
             else if ((*it) == '*')
-                stack.push(p2 * p1);            
+                stack.push(p1 * p2);
         }
     }
     std::cout << "Result: " << stack.top() << std::endl;
