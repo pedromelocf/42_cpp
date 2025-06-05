@@ -50,8 +50,8 @@ void RPN::processExpression(std::string const & expression) {
             else if ((*it) == '-')
                 stack.push(p1 - p2);
             else if ((*it) == '/') {
-                if (p2 != 0) {
-                    std::cerr << "Not possible to divide by 0" << std::endl;
+                if (p2 == 0) {
+                    std::cerr << "Error: Not possible to divide by 0" << std::endl;
                     return;
                 }
                 stack.push(p1 / p2);
