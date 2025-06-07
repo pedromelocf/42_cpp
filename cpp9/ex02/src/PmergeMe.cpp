@@ -171,8 +171,10 @@ void PmergeMe::fordJohnsonSortVector(std::vector<int>& arr) {
         result.insert(largerIt, largerElement);
     }
 
-	if (hasLeft) 
-        result.insert(std::lower_bound(result.begin(), result.end(), leftElements), leftElements);
+	if (hasLeft) {
+		std::vector<int>::iterator it = std::lower_bound(result.begin(), result.end(), leftElements);
+        result.insert(it, leftElements);
+	}
 
     arr = result;
 }
@@ -239,8 +241,10 @@ void PmergeMe::fordJohnsonSortDeque(std::deque<int>& arr) {
         result.insert(largerIt, largerElement);
     }
 
-	if (hasLeft) 
-        result.insert(std::lower_bound(result.begin(), result.end(), leftElements), leftElements);
+	if (hasLeft) {
+		std::deque<int>::iterator it = std::lower_bound(result.begin(), result.end(), leftElements);
+        result.insert(it, leftElements);
+	}
 
     arr = result;
 }
