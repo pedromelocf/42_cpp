@@ -21,8 +21,7 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
 
 PmergeMe::~PmergeMe() {}
 
-bool PmergeMe::validateInput(const std::string &input)
-{
+bool PmergeMe::validateInput(const std::string &input) {
 	if (input.empty())
 		return (false);
 
@@ -42,8 +41,7 @@ bool PmergeMe::validateInput(const std::string &input)
 	return (true);
 }
 
-void PmergeMe::parseArgs(char **argv)
-{
+void PmergeMe::parseArgs(char **argv) {
 	_vector.clear();
 	_deque.clear();
 
@@ -102,12 +100,12 @@ void PmergeMe::processArgs(char **argv) {
 
 void PmergeMe::displayElapsedTime() {
 
-	std::cout << "Time to process a range of " << _vector.size() 
-		<< " elements with std::vector: " 
+	std::cout << "Time to process a range of " << _vector.size()
+		<< " elements with std::vector: "
 		<< std::fixed << std::setprecision(5) << _vectorTime << " us" << std::endl;
-	
-	std::cout << "Time to process a range of " << _deque.size() 
-		<< " elements with std::deque: " 
+
+	std::cout << "Time to process a range of " << _deque.size()
+		<< " elements with std::deque: "
 		<< std::fixed << std::setprecision(5) << _dequeTime << " us" << std::endl;
 }
 
@@ -138,16 +136,21 @@ void PmergeMe::mergeVector() {
 
             size_t mid = i + _pairSizeVector / 2;
             size_t end = i + _pairSizeVector;
-            if (_vector[mid - 1] > _vector[end - 1]) 
+            if (_vector[mid - 1] > _vector[end - 1])
                 std::swap_ranges(_vector.begin() + i, _vector.begin() + mid, _vector.begin() + mid );
         }
+		std::cout << "Pair size: " << _pairSizeVector << std::endl;
+		std::cout << "Vector merge: " ;
+		for (std::vector<int>::const_iterator it = _vector.begin(); it != _vector.end(); ++it)
+			std::cout << *it << " ";
+		std::cout << std::endl << std::endl;
 		_pairSizeVector *= 2;
 	}
 	_pairSizeVector /= 2;
 }
 
 void PmergeMe::insertionVector() {
-	
+
 	while (true) {
 
 		size_t i = 0;
@@ -158,7 +161,7 @@ void PmergeMe::insertionVector() {
 			std::vector<int> chunk(_vector.begin() + i, _vector.begin() + i + _pairSizeVector);
 			if (i == 0 || ((i / _pairSizeVector) % 2) == 1)
 				main.insert(main.end(), chunk.begin(), chunk.end());
-			else 
+			else
 				pend.insert(pend.end(), chunk.begin(), chunk.end());
 		}
 
@@ -178,7 +181,6 @@ void PmergeMe::insertionVector() {
 				break;
 			int insertion_times = jacobsthal_dif;
 			while(insertion_times) {
-				
 				std::vector<int>::iterator chunk_begin = pend.begin() + ((insertion_times - 1) * _pairSizeVector);
 				std::vector<int>::iterator chunk_end = chunk_begin + _pairSizeVector;
 				std::vector<int> chunk(chunk_begin, chunk_end);
@@ -186,7 +188,7 @@ void PmergeMe::insertionVector() {
 				std::vector<int>::iterator chunk_main_last_value, insert_chunk_pos = main.begin();
 				for(long unsigned int j = 0, i = 0; i < main.size() / _pairSizeVector; j += _pairSizeVector, i++) {
 					chunk_main_last_value = main.begin() + j + _pairSizeVector - 1;
-					if (pend_value_to_find > *chunk_main_last_value) 
+					if (pend_value_to_find > *chunk_main_last_value)
 						insert_chunk_pos = chunk_main_last_value + 1;
 				}
 				pend.erase(chunk_begin, chunk_end);
@@ -199,17 +201,18 @@ void PmergeMe::insertionVector() {
 		}
 
 		for (ssize_t i = pend_size - 1; i >= 0; i--) {
-			std::vector<int>::iterator chunk_begin = pend.end() - _pairSizeVector * i;
-			std::vector<int>::iterator chunk_end = pend.end() - (_pairSizeVector * i) + _pairSizeVector;
+			std::vector<int>::iterator chunk_begin = pend.end() - _pairSizeVector;
+			std::vector<int>::iterator chunk_end = pend.end();
 			std::vector<int> chunk(chunk_begin, chunk_end);
 			int pend_value_to_find = chunk.back();
 			std::vector<int>::iterator chunk_main_last_value, insert_chunk_pos = main.begin();
 			for(long unsigned int j = 0, i = 0; i < main.size() / _pairSizeVector; j += _pairSizeVector, i++) {
 				chunk_main_last_value = main.begin() + j + _pairSizeVector - 1;
-				if (pend_value_to_find > *chunk_main_last_value) 
+				if (pend_value_to_find > *chunk_main_last_value)
 					insert_chunk_pos = chunk_main_last_value + 1;
 			}
 			main.insert(insert_chunk_pos, chunk.begin(), chunk.end());
+			pend.erase(chunk_begin, chunk_end);
 		}
 		pend.clear();
 		main.insert(main.end(), temp.begin(), temp.end());
