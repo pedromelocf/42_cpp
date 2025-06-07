@@ -68,6 +68,8 @@ void PmergeMe::parseArgs(char **argv)
 		}
 		i++;
 	}
+	_pairSizeVector = 2;
+	_pairSizeDeque = 2;
 
 	if (_vector.empty())
 		throw std::runtime_error(std::string("Error"));
@@ -83,14 +85,14 @@ void PmergeMe::processArgs(char **argv) {
 	std::cout << std::endl;
 
 	clock_t start = std::clock();
-	fordJohnsonSortVector(_vector);
+	fordJohnsonSortVector();
 	clock_t end = std::clock();
 	_vectorTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 
-	start = std::clock();
-	fordJohnsonSortDeque(_deque);
-	end = std::clock();
-	_dequeTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
+	// start = std::clock();
+	// fordJohnsonSortDeque(_deque);
+	// end = std::clock();
+	// _dequeTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 
 	std::cout << "After: " ;
 	for (std::vector<int>::const_iterator it = _vector.begin(); it != _vector.end(); ++it)
@@ -109,142 +111,118 @@ void PmergeMe::displayElapsedTime() {
 		<< std::fixed << std::setprecision(5) << _dequeTime << " us" << std::endl;
 }
 
-void PmergeMe::fordJohnsonSortVector(std::vector<int>& arr) {
+void PmergeMe::checkSorting() {
 
-	if (arr.size() == 1)
-		return;
-
-	std::vector<std::pair<int, int> > pairs;
-    for (size_t i = 0; i < arr.size() - 1; i += 2)
-    {
-        if (arr[i] > arr[i + 1])
-            pairs.push_back(std::make_pair(arr[i], arr[i + 1]));
-        else
-            pairs.push_back(std::make_pair(arr[i + 1], arr[i]));
-    }
-
-	bool hasLeft = (arr.size() % 2 != 0);
-    int leftElements = 0;
-    if(hasLeft) {
-    	leftElements = arr[arr.size() - 1];
+	bool sorted = true;
+	for (size_t i = 1; i < _vector.size(); ++i) {
+		if (_vector[i - 1] > _vector[i]) {
+			sorted = false;
+			break;
+		}
 	}
-
-	std::vector<int> largerElements;
-	for (size_t i = 0; i < pairs.size(); i++)
-        largerElements.push_back(pairs[i].first);
-
-	fordJohnsonSortVector(largerElements);
-
-	std::vector<int> result;
-	result.push_back(pairs[0].second);
-    result.push_back(largerElements[0]);
-
-	std::vector<int> jacobsthalIndices;
-	int j1 = 1, j2 = 3;
-    jacobsthalIndices.push_back(1);
-	while (j2 < static_cast<int>(pairs.size()))
-    {
-        jacobsthalIndices.push_back(j2);
-        int temp = j2;
-        j2 = 2 * j1 + j2;
-        j1 = temp;
-	}
-
-	for (size_t i = 1; i < pairs.size(); i++) {
-        if (std::find(jacobsthalIndices.begin(), jacobsthalIndices.end(), i) == jacobsthalIndices.end())
-            jacobsthalIndices.push_back(i);
-    }
-
-	for (size_t idx = 0; idx < jacobsthalIndices.size(); idx++) {
-        int i = jacobsthalIndices[idx];
-
-        if (i == 0 || i >= static_cast<int>(pairs.size()))
-            continue ;
-        
-        int largerElement = largerElements[i];
-        int smallerElement = pairs[i].second;
-
-        std::vector<int>::iterator smallerIt = std::lower_bound(result.begin(), result.end(), smallerElement);
-        result.insert(smallerIt, smallerElement);
-
-        std::vector<int>::iterator largerIt = std::lower_bound(result.begin(), result.end(), largerElement);
-        result.insert(largerIt, largerElement);
-    }
-
-	if (hasLeft) {
-		std::vector<int>::iterator it = std::lower_bound(result.begin(), result.end(), leftElements);
-        result.insert(it, leftElements);
-	}
-
-    arr = result;
+	std::cout << (sorted ? "Vector is sorted." : "Vector is NOT sorted.") << std::endl;
 }
 
-void PmergeMe::fordJohnsonSortDeque(std::deque<int>& arr) {
+void PmergeMe::fordJohnsonSortVector() {
 
-	if (arr.size() == 1)
-			return;
-
-	std::deque<std::pair<int, int> > pairs;
-    for (size_t i = 0; i < arr.size() - 1; i += 2)
-    {
-        if (arr[i] > arr[i + 1])
-            pairs.push_back(std::make_pair(arr[i], arr[i + 1]));
-        else
-            pairs.push_back(std::make_pair(arr[i + 1], arr[i]));
-    }
-
-	bool hasLeft = (arr.size() % 2 != 0);
-    int leftElements = 0;
-    if (hasLeft) {
-    	leftElements = arr[arr.size() - 1];
-	}
-
-	std::deque<int> largerElements;
-	for (size_t i = 0; i < pairs.size(); i++)
-        largerElements.push_back(pairs[i].first);
-
-	fordJohnsonSortDeque(largerElements);
-
-	std::deque<int> result;
-	result.push_back(pairs[0].second);
-    result.push_back(largerElements[0]);
-
-	std::deque<int> jacobsthalIndices;
-	int j1 = 1, j2 = 3;
-    jacobsthalIndices.push_back(1);
-	while (j2 < static_cast<int>(pairs.size()))
-    {
-        jacobsthalIndices.push_back(j2);
-        int temp = j2;
-        j2 = 2 * j1 + j2;
-        j1 = temp;
-	}
-
-	for (size_t i = 1; i < pairs.size(); i++) {
-        if (std::find(jacobsthalIndices.begin(), jacobsthalIndices.end(), i) == jacobsthalIndices.end())
-            jacobsthalIndices.push_back(i);
-    }
-
-	for (size_t idx = 0; idx < jacobsthalIndices.size(); idx++) {
-        int i = jacobsthalIndices[idx];
-
-        if (i == 0 || i >= static_cast<int>(pairs.size()))
-            continue ;
-        
-        int largerElement = largerElements[i];
-        int smallerElement = pairs[i].second;
-
-        std::deque<int>::iterator smallerIt = std::lower_bound(result.begin(), result.end(), smallerElement);
-        result.insert(smallerIt, smallerElement);
-
-        std::deque<int>::iterator largerIt = std::lower_bound(result.begin(), result.end(), largerElement);
-        result.insert(largerIt, largerElement);
-    }
-
-	if (hasLeft) {
-		std::deque<int>::iterator it = std::lower_bound(result.begin(), result.end(), leftElements);
-        result.insert(it, leftElements);
-	}
-
-    arr = result;
+	mergeVector();
+	insertionVector();
 }
+
+void PmergeMe::mergeVector() {
+
+	while ((_vector.size() / 2) > _pairSizeVector) {
+
+        size_t chunks = _vector.size() / _pairSizeVector;
+        for (size_t i = 0; chunks > 0; i += _pairSizeVector, --chunks) {
+
+            size_t mid = i + _pairSizeVector / 2;
+            size_t end = i + _pairSizeVector;
+            if (_vector[mid - 1] > _vector[end - 1]) 
+                std::swap_ranges(_vector.begin() + i, _vector.begin() + mid, _vector.begin() + mid );
+        }
+		_pairSizeVector *= 2;
+	}
+	_pairSizeVector /= 2;
+}
+
+void PmergeMe::insertionVector() {
+	
+	while (true) {
+
+		size_t i = 0;
+		std::vector<int> temp, main, pend;
+
+		for (;i + _pairSizeVector <= _vector.size(); i += _pairSizeVector) {
+
+			std::vector<int> chunk(_vector.begin() + i, _vector.begin() + i + _pairSizeVector);
+			if (i == 0 || ((i / _pairSizeVector) % 2) == 1)
+				main.insert(main.end(), chunk.begin(), chunk.end());
+			else 
+				pend.insert(pend.end(), chunk.begin(), chunk.end());
+		}
+
+		if (_vector.size() % _pairSizeVector != 0) {
+			size_t leftover = _vector.size() - i;
+			temp.insert(temp.end(), _vector.end() - leftover, _vector.end());
+		}
+
+		int prev_jacobsthal = jacobsthal_number(1);
+		int inserted_numbers = 0;
+		int pend_size = static_cast<int>(pend.size() / _pairSizeVector);
+		for (size_t p = 2;; p++) {
+
+			int curr_jacobsthal = jacobsthal_number(p);
+			int jacobsthal_dif = curr_jacobsthal - prev_jacobsthal;
+			if (jacobsthal_dif > pend_size)
+				break;
+			int insertion_times = jacobsthal_dif;
+			while(insertion_times) {
+				
+				std::vector<int>::iterator chunk_begin = pend.begin() + ((insertion_times - 1) * _pairSizeVector);
+				std::vector<int>::iterator chunk_end = chunk_begin + _pairSizeVector;
+				std::vector<int> chunk(chunk_begin, chunk_end);
+				int pend_value_to_find = chunk.back();
+				std::vector<int>::iterator chunk_main_last_value, insert_chunk_pos = main.begin();
+				for(long unsigned int j = 0, i = 0; i < main.size() / _pairSizeVector; j += _pairSizeVector, i++) {
+					chunk_main_last_value = main.begin() + j + _pairSizeVector - 1;
+					if (pend_value_to_find > *chunk_main_last_value) 
+						insert_chunk_pos = chunk_main_last_value + 1;
+				}
+				pend.erase(chunk_begin, chunk_end);
+				main.insert(insert_chunk_pos, chunk.begin(), chunk.end());
+				insertion_times--;
+			}
+			prev_jacobsthal = curr_jacobsthal;
+			inserted_numbers += jacobsthal_dif;
+			pend_size -= jacobsthal_dif;
+		}
+
+		for (ssize_t i = pend_size - 1; i >= 0; i--) {
+			std::vector<int>::iterator chunk_begin = pend.end() - _pairSizeVector * i;
+			std::vector<int>::iterator chunk_end = pend.end() - (_pairSizeVector * i) + _pairSizeVector;
+			std::vector<int> chunk(chunk_begin, chunk_end);
+			int pend_value_to_find = chunk.back();
+			std::vector<int>::iterator chunk_main_last_value, insert_chunk_pos = main.begin();
+			for(long unsigned int j = 0, i = 0; i < main.size() / _pairSizeVector; j += _pairSizeVector, i++) {
+				chunk_main_last_value = main.begin() + j + _pairSizeVector - 1;
+				if (pend_value_to_find > *chunk_main_last_value) 
+					insert_chunk_pos = chunk_main_last_value + 1;
+			}
+			main.insert(insert_chunk_pos, chunk.begin(), chunk.end());
+		}
+		pend.clear();
+		main.insert(main.end(), temp.begin(), temp.end());
+		_vector = main;
+		if (_pairSizeVector == 1)
+			break;
+		_pairSizeVector /= 2;
+	}
+}
+
+// void PmergeMe::fordJohnsonSortDeque(std::deque<int>& arr) {
+// 	mergeDeque();
+// 	insertionDeque();
+// }
+
+long jacobsthal_number(long n) { return round((pow(2, n + 1) + pow(-1, n)) / 3); }

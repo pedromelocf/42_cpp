@@ -22,12 +22,16 @@ class PmergeMe {
 		std::deque<int> 	_deque;
         double				_vectorTime;
         double				_dequeTime;
+		long unsigned int	_pairSizeVector;
+		long unsigned int	_pairSizeDeque;
 		
 		bool	validateInput(const std::string& input);
 		void	parseArgs(char **argv);
 
-		void	fordJohnsonSortVector(std::vector<int>& arr);
-		void	fordJohnsonSortDeque(std::deque<int>& arr);
+		void	fordJohnsonSortVector();
+		void 	mergeVector();
+		void 	insertionVector();
+		// void	fordJohnsonSortDeque(std::deque<int>& arr);
 
 	public:
 		PmergeMe();
@@ -36,7 +40,10 @@ class PmergeMe {
 		~PmergeMe();
 		void	processArgs(char **argv);
 		void 	displayElapsedTime();
+		void	checkSorting();
 
 };
+
+long jacobsthal_number(long n);
 
 #endif

@@ -9,7 +9,7 @@ CPP_OBJ = $(addprefix $(CPP_OBJ_PATH)/, $(notdir $(CPP_SRCS:.cpp=.o)))
 CPP_SRCS = $(wildcard ./src/*.cpp)
 
 C++98 = c++ -std=c++98
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 VALGRIND = valgrind
 
 all: $(NAME)
