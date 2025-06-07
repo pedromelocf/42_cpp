@@ -159,8 +159,18 @@ void PmergeMe::insertionVector() {
 		for (;i + _pairSizeVector <= _vector.size(); i += _pairSizeVector) {
 
 			std::vector<int> chunk(_vector.begin() + i, _vector.begin() + i + _pairSizeVector);
-			if (i == 0 || ((i / _pairSizeVector) % 2) == 1)
-				main.insert(main.end(), chunk.begin(), chunk.end());
+			if (((i / _pairSizeVector) % 2) == 1 || i == 0) {
+				int pend_value_to_find = chunk.back();
+				std::vector<int>::iterator insert_chunk_pos = main.end();
+				for (size_t j = 0; j + _pairSizeVector <= main.size(); j += _pairSizeVector) {
+					int current_chunk_last = *(main.begin() + j + _pairSizeVector - 1);
+					if (pend_value_to_find < current_chunk_last) {
+						insert_chunk_pos = main.begin() + j;
+						break;
+					}
+				}
+				main.insert(insert_chunk_pos, chunk.begin(), chunk.end());
+			}
 			else
 				pend.insert(pend.end(), chunk.begin(), chunk.end());
 		}
