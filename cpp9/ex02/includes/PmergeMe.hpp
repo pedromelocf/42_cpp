@@ -7,7 +7,6 @@
 #include <deque>
 #include <set>
 #include <cmath>
-#include <algorithm>
 #include <cstring>
 #include <cstdlib>
 #include <stdexcept>
@@ -31,13 +30,17 @@ class PmergeMe {
 		void	fordJohnsonSortVector();
 		void 	mergeVector();
 		void 	insertionVector();
-		// void	fordJohnsonSortDeque(std::deque<int>& arr);
+
+		void	fordJohnsonSortDeque();
+		void 	mergeDeque();
+		void 	insertionDeque();
 
 	public:
 		PmergeMe();
 		PmergeMe(const PmergeMe& other);
 		PmergeMe& operator=(const PmergeMe& other);
 		~PmergeMe();
+
 		void	processArgs(char **argv);
 		void 	displayElapsedTime();
 		void	checkSorting();
