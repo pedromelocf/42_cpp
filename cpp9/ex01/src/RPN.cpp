@@ -18,7 +18,7 @@ bool RPN::checkExpression(std::string const & expression) {
     std::string::const_iterator it = expression.begin();
     std::string::const_iterator ite = expression.end();
 
-    if (expression.length() == 1 || std::isdigit(*ite) || !std::isdigit(*it) || expression.length() % 2 == 0)
+    if (expression.length() <= 4 || std::isdigit(*ite) || !std::isdigit(*it) || expression.length() % 2 == 0)
         return false;
     it++;
     for (int i = 0; it != ite; ++it, ++i) {
@@ -42,8 +42,20 @@ void RPN::processExpression(std::string const & expression) {
             stack.push(std::atoi(&(*it)));
 
         else if ((*it) == '+' || (*it) == '-' || (*it) == '/' || (*it) == '*') {
-            p2 = stack.top(); stack.pop();
-            p1 = stack.top(); stack.pop();
+            
+            if (stack.empty()) {
+                std::cerr << "Error" << std::endl;
+                return;
+            }
+            p2 = stack.top();
+            stack.pop();
+            
+            if (stack.empty()) {
+                std::cerr << "Error" << std::endl;
+                return;
+            }
+            p1 = stack.top();
+            stack.pop();
 
             if ((*it) == '+')
                 stack.push(p1 + p2);
@@ -60,6 +72,12 @@ void RPN::processExpression(std::string const & expression) {
                 stack.push(p1 * p2);
         }
     }
+
+    if (stack.size() != 1) {
+        std::cerr << "Error" << std::endl;
+        return;
+    }
+
     std::cout << "Result: " << stack.top() << std::endl;
     stack.pop();
 }

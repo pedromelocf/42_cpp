@@ -19,8 +19,8 @@ class PmergeMe {
 	private:
 		std::vector<int>	_vector;
 		std::deque<int> 	_deque;
-        double				_vectorTime;
-        double				_dequeTime;
+    double						_vectorTime;
+    double						_dequeTime;
 		long unsigned int	_pairSizeVector;
 		long unsigned int	_pairSizeDeque;
 		
@@ -43,7 +43,9 @@ class PmergeMe {
 
 		void	processArgs(char **argv);
 		void 	displayElapsedTime();
-		void	checkSorting();
+		void	displaySorting();
+		bool	checkVecSorting();
+		bool	checkDeqSorting();
 
 };
 

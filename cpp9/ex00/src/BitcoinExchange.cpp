@@ -144,7 +144,11 @@ void BitcoinExchange::getOutput(std::string const & date, std::string const & am
             std::cerr << "Error: invalid amount => " << amount << std::endl;
             break;
         default:
-            std::cout << date << " => " << amount << " = " << getClosestDailyPrice(date) * std::atof(amount.c_str())  << std::endl;
+            double closestDailyPrice = getClosestDailyPrice(date);
+            if (closestDailyPrice != -1)
+                std::cout << date << " => " << amount << " = " << closestDailyPrice * std::atof(amount.c_str())  << std::endl;
+            else
+                std::cout << "Error: invalid date => " << date << " " << std::endl;
             break;
     }
 }
@@ -174,7 +178,6 @@ bool checkDigits(std::string const & value) {
             return false;
         if (*it == '.')
             i += 1;
-
     }
     return true;
 }

@@ -81,27 +81,32 @@ void PmergeMe::processArgs(char **argv) {
 
 	parseArgs(argv);
 
-	std::cout << "Before: " ;
+	std::cout << "Vector Before Sorting: " ;
 	for (std::vector<int>::const_iterator it = _vector.begin(); it != _vector.end(); ++it)
 		std::cout << *it << " ";
 	std::cout << std::endl;
+
+	std::cout << "Deque Before Sorting:  " ;
+	for (std::deque<int>::const_iterator it = _deque.begin(); it != _deque.end(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl << std::endl;
 
 	clock_t start = std::clock();
 	fordJohnsonSortVector();
 	clock_t end = std::clock();
 	_vectorTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 
+	std::cout << "Vector After Sorting: " ;
+	for (std::vector<int>::const_iterator it = _vector.begin(); it != _vector.end(); ++it)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+
 	start = std::clock();
 	fordJohnsonSortDeque();
 	end = std::clock();
 	_dequeTime = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 
-	std::cout << "Vector After: " ;
-	for (std::vector<int>::const_iterator it = _vector.begin(); it != _vector.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-
-	std::cout << "Deque After:  " ;
+	std::cout << "Deque After Sorting:  " ;
 	for (std::deque<int>::const_iterator it = _deque.begin(); it != _deque.end(); ++it)
 		std::cout << *it << " ";
 	std::cout << std::endl << std::endl;
@@ -118,27 +123,6 @@ void PmergeMe::displayElapsedTime() {
 		<< std::fixed << std::setprecision(5) << _dequeTime << " us" << std::endl << std::endl;
 }
 
-void PmergeMe::checkSorting() {
-
-	bool sorted = true;
-	for (size_t i = 1; i < _vector.size(); ++i) {
-		if (_vector[i - 1] > _vector[i]) {
-			sorted = false;
-			break;
-		}
-	}
-	std::cout << (sorted ? "Vector is sorted." : "Vector is NOT sorted.") << std::endl;
-
-	sorted = true;
-	for (size_t i = 1; i < _deque.size(); ++i) {
-		if (_deque[i - 1] > _deque[i]) {
-			sorted = false;
-			break;
-		}
-	}
-	std::cout << (sorted ? "Deque is sorted." : "Deque is NOT sorted.") << std::endl;
-}
-
 void PmergeMe::fordJohnsonSortVector() {
 
 	mergeVector();
@@ -147,22 +131,36 @@ void PmergeMe::fordJohnsonSortVector() {
 
 void PmergeMe::mergeVector() {
 
-	while ((_vector.size() / 2) > _pairSizeVector) {
+	if (checkVecSorting() == true || _vector.size() == 1)
+		return;
 
-        size_t chunks = _vector.size() / _pairSizeVector;
-        for (size_t i = 0; chunks > 0; i += _pairSizeVector, --chunks) {
+  while (true) {
+     
+		size_t chunks = _vector.size() / _pairSizeVector;
 
-            size_t mid = i + _pairSizeVector / 2;
-            size_t end = i + _pairSizeVector;
-            if (_vector[mid - 1] > _vector[end - 1])
-                std::swap_ranges(_vector.begin() + i, _vector.begin() + mid, _vector.begin() + mid );
-        }
+    for (size_t i = 0; chunks > 0; i += _pairSizeVector, --chunks) {
+    	size_t mid = i + _pairSizeVector / 2;
+    	size_t end = i + _pairSizeVector;
+
+      if (mid > _vector.size())
+      	mid = _vector.size();
+      if (end > _vector.size())
+      	end = _vector.size();
+
+			if (_vector[mid - 1] > _vector[end - 1]) 
+					std::swap_ranges(_vector.begin() + i, _vector.begin() + mid, _vector.begin() + mid );
+    }
+    if (_pairSizeVector >= _vector.size())
+      break;
 		_pairSizeVector *= 2;
 	}
 	_pairSizeVector /= 2;
 }
 
 void PmergeMe::insertionVector() {
+
+	if (checkVecSorting() == true || _vector.size() == 1)
+		return;
 
 	while (true) {
 
@@ -263,22 +261,34 @@ void PmergeMe::insertionVector() {
 }
 
 void PmergeMe::fordJohnsonSortDeque() {
+	
 	mergeDeque();
 	insertionDeque();
 }
 
 void PmergeMe::mergeDeque() {
 
-	while ((_deque.size() / 2) > _pairSizeDeque) {
+	if (checkDeqSorting() == true || _deque.size() == 1)
+		return;
 
-        size_t chunks = _deque.size() / _pairSizeDeque;
-        for (size_t i = 0; chunks > 0; i += _pairSizeDeque, --chunks) {
+  while (true) {
+     
+		size_t chunks = _deque.size() / _pairSizeDeque;
 
-            size_t mid = i + _pairSizeDeque / 2;
-            size_t end = i + _pairSizeDeque;
-            if (_deque[mid - 1] > _deque[end - 1])
-                std::swap_ranges(_deque.begin() + i, _deque.begin() + mid, _deque.begin() + mid );
-        }
+    for (size_t i = 0; chunks > 0; i += _pairSizeDeque, --chunks) {
+    	size_t mid = i + _pairSizeDeque / 2;
+    	size_t end = i + _pairSizeDeque;
+
+      if (mid > _deque.size())
+      	mid = _deque.size();
+      if (end > _deque.size())
+      	end = _deque.size();
+
+			if (_deque[mid - 1] > _deque[end - 1]) 
+					std::swap_ranges(_deque.begin() + i, _deque.begin() + mid, _deque.begin() + mid );
+    }
+    if (_pairSizeDeque >= _deque.size())
+      break;
 		_pairSizeDeque *= 2;
 	}
 	_pairSizeDeque /= 2;
@@ -286,6 +296,9 @@ void PmergeMe::mergeDeque() {
 
 void PmergeMe::insertionDeque() {
 
+	if (checkDeqSorting() == true || _deque.size() == 1)
+		return;
+		
 	while (true) {
 
 		size_t i = 0;
@@ -385,3 +398,36 @@ void PmergeMe::insertionDeque() {
 }
 
 long jacobsthal_number(long n) { return round((pow(2, n + 1) + pow(-1, n)) / 3); }
+
+void PmergeMe::displaySorting() {
+
+	bool sorted = checkVecSorting();
+	std::cout << (sorted ? "Vector is sorted." : "Vector is NOT sorted.") << std::endl;
+
+	sorted = checkDeqSorting();
+	std::cout << (sorted ? "Deque is sorted." : "Deque is NOT sorted.") << std::endl;
+}
+
+bool PmergeMe::checkVecSorting() {
+
+	bool sorted = true;
+	for (size_t i = 1; i < _vector.size(); ++i) {
+		if (_vector[i - 1] > _vector[i]) {
+			sorted = false;
+			break;
+		}
+	}
+	return (sorted);
+}
+
+bool PmergeMe::checkDeqSorting() {
+
+	bool sorted = true;
+	for (size_t i = 1; i < _deque.size(); ++i) {
+		if (_deque[i - 1] > _deque[i]) {
+			sorted = false;
+			break;
+		}
+	}
+	return (sorted);
+}

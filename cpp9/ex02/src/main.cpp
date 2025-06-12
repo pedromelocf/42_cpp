@@ -11,7 +11,7 @@ int main (int argc, char **argv) {
       PmergeMe pmerge;
       pmerge.processArgs(argv);
       pmerge.displayElapsedTime();
-      pmerge.checkSorting();
+      pmerge.displaySorting();
    } catch (const std::exception& e) {
       std::cerr << e.what() << std::endl;
       return (2);
